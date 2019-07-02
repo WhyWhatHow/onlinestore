@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sdut.onlinestore.mapper.CategoryMapper">
-  <resultMap id="BaseResultMap" type="com.sdut.onlinestore.pojo.Category">
-    <result column="cid" jdbcType="INTEGER" property="cid" />
-    <result column="cname" jdbcType="VARCHAR" property="cname" />
-    <result column="parentId" jdbcType="INTEGER" property="parentid" />
-    <result column="location" jdbcType="VARCHAR" property="location" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdut.onlinestore.mapper.CategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.sdut.onlinestore.pojo.Category" >
+    <id column="cid" property="cid" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -36,25 +36,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -65,545 +65,132 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     cid, cname, parentId, location
   </sql>
-  <select id="selectByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sdut.onlinestore.pojo.CategoryExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from category
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from category
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from category
-    <if test="_parameter != null">
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" >
+    delete from category
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sdut.onlinestore.pojo.Category">
+  <insert id="insert" parameterType="com.sdut.onlinestore.pojo.Category" >
     insert into category (cid, cname, parentId, 
       location)
     values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
       #{location,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sdut.onlinestore.pojo.Category">
+  <insert id="insertSelective" parameterType="com.sdut.onlinestore.pojo.Category" >
     insert into category
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cid != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
         cid,
       </if>
-      <if test="cname != null">
+      <if test="cname != null" >
         cname,
       </if>
-      <if test="parentid != null">
+      <if test="parentid != null" >
         parentId,
       </if>
-      <if test="location != null">
+      <if test="location != null" >
         location,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cid != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cid != null" >
         #{cid,jdbcType=INTEGER},
       </if>
-      <if test="cname != null">
+      <if test="cname != null" >
         #{cname,jdbcType=VARCHAR},
       </if>
-      <if test="parentid != null">
+      <if test="parentid != null" >
         #{parentid,jdbcType=INTEGER},
       </if>
-      <if test="location != null">
+      <if test="location != null" >
         #{location,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" resultType="java.lang.Integer" >
     select count(*) from category
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update category
-    <set>
-      <if test="record.cid != null">
+    <set >
+      <if test="record.cid != null" >
         cid = #{record.cid,jdbcType=INTEGER},
       </if>
-      <if test="record.cname != null">
+      <if test="record.cname != null" >
         cname = #{record.cname,jdbcType=VARCHAR},
       </if>
-      <if test="record.parentid != null">
+      <if test="record.parentid != null" >
         parentId = #{record.parentid,jdbcType=INTEGER},
       </if>
-      <if test="record.location != null">
+      <if test="record.location != null" >
         location = #{record.location,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update category
     set cid = #{record.cid,jdbcType=INTEGER},
       cname = #{record.cname,jdbcType=VARCHAR},
       parentId = #{record.parentid,jdbcType=INTEGER},
       location = #{record.location,jdbcType=VARCHAR}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <resultMap id="BaseResultMap" type="com.sdut.onlinestore.pojo.Category">
-    <result column="cid" jdbcType="INTEGER" property="cid" />
-    <result column="cname" jdbcType="VARCHAR" property="cname" />
-    <result column="parentId" jdbcType="INTEGER" property="parentid" />
-    <result column="location" jdbcType="VARCHAR" property="location" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    cid, cname, parentId, location
-  </sql>
-  <select id="selectByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from category
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample">
-    delete from category
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.sdut.onlinestore.pojo.Category">
-    insert into category (cid, cname, parentId, 
-      location)
-    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
-      #{location,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.sdut.onlinestore.pojo.Category">
-    insert into category
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cid != null">
-        cid,
-      </if>
-      <if test="cname != null">
-        cname,
-      </if>
-      <if test="parentid != null">
-        parentId,
-      </if>
-      <if test="location != null">
-        location,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cid != null">
-        #{cid,jdbcType=INTEGER},
-      </if>
-      <if test="cname != null">
-        #{cname,jdbcType=VARCHAR},
-      </if>
-      <if test="parentid != null">
-        #{parentid,jdbcType=INTEGER},
-      </if>
-      <if test="location != null">
-        #{location,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" resultType="java.lang.Integer">
-    select count(*) from category
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.onlinestore.pojo.Category" >
     update category
-    <set>
-      <if test="record.cid != null">
-        cid = #{record.cid,jdbcType=INTEGER},
+    <set >
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
       </if>
-      <if test="record.cname != null">
-        cname = #{record.cname,jdbcType=VARCHAR},
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=INTEGER},
       </if>
-      <if test="record.parentid != null">
-        parentId = #{record.parentid,jdbcType=INTEGER},
-      </if>
-      <if test="record.location != null">
-        location = #{record.location,jdbcType=VARCHAR},
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
+    where cid = #{cid,jdbcType=INTEGER}
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByPrimaryKey" parameterType="com.sdut.onlinestore.pojo.Category" >
     update category
-    set cid = #{record.cid,jdbcType=INTEGER},
-      cname = #{record.cname,jdbcType=VARCHAR},
-      parentId = #{record.parentid,jdbcType=INTEGER},
-      location = #{record.location,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <resultMap id="BaseResultMap" type="com.sdut.onlinestore.pojo.Category">
-    <result column="cid" jdbcType="VARCHAR" property="cid" />
-    <result column="cname" jdbcType="VARCHAR" property="cname" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    cid, cname
-  </sql>
-  <select id="selectByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from category
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample">
-    delete from category
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.sdut.onlinestore.pojo.Category">
-    insert into category (cid, cname)
-    values (#{cid,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.sdut.onlinestore.pojo.Category">
-    insert into category
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cid != null">
-        cid,
-      </if>
-      <if test="cname != null">
-        cname,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cid != null">
-        #{cid,jdbcType=VARCHAR},
-      </if>
-      <if test="cname != null">
-        #{cname,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" resultType="java.lang.Integer">
-    select count(*) from category
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update category
-    <set>
-      <if test="record.cid != null">
-        cid = #{record.cid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cname != null">
-        cname = #{record.cname,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update category
-    set cid = #{record.cid,jdbcType=VARCHAR},
-      cname = #{record.cname,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <resultMap id="BaseResultMap" type="com.sdut.onlinestore.pojo.Category">
-    <result column="cid" jdbcType="INTEGER" property="cid" />
-    <result column="cname" jdbcType="VARCHAR" property="cname" />
-    <result column="cdesc" jdbcType="VARCHAR" property="cdesc" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    cid, cname, cdesc
-  </sql>
-  <select id="selectByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from category
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample">
-    delete from category
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.sdut.onlinestore.pojo.Category">
-    insert into category (cid, cname, cdesc
-      )
-    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{cdesc,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.sdut.onlinestore.pojo.Category">
-    insert into category
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="cid != null">
-        cid,
-      </if>
-      <if test="cname != null">
-        cname,
-      </if>
-      <if test="cdesc != null">
-        cdesc,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="cid != null">
-        #{cid,jdbcType=INTEGER},
-      </if>
-      <if test="cname != null">
-        #{cname,jdbcType=VARCHAR},
-      </if>
-      <if test="cdesc != null">
-        #{cdesc,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.sdut.onlinestore.pojo.CategoryExample" resultType="java.lang.Integer">
-    select count(*) from category
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update category
-    <set>
-      <if test="record.cid != null">
-        cid = #{record.cid,jdbcType=INTEGER},
-      </if>
-      <if test="record.cname != null">
-        cname = #{record.cname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cdesc != null">
-        cdesc = #{record.cdesc,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update category
-    set cid = #{record.cid,jdbcType=INTEGER},
-      cname = #{record.cname,jdbcType=VARCHAR},
-      cdesc = #{record.cdesc,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
+    set cname = #{cname,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR}
+    where cid = #{cid,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,65 +1,53 @@
 package com.sdut.onlinestore.pojo;
 
-import java.util.Date;
-
 public class Item {
-    private Integer id;
+    private String itemid;
 
-    private String name;
+    private Integer quantity;
 
-    private Float price;
+    private Double total;
 
-    private String detail;
+    private String pid;
 
-    private String pic;
+    private String oid;
 
-    private Date createtime;
-
-    public Integer getId() {
-        return id;
+    public String getItemid() {
+        return itemid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setItemid(String itemid) {
+        this.itemid = itemid == null ? null : itemid.trim();
     }
 
-    public String getName() {
-        return name;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public Float getPrice() {
-        return price;
+    public Double getTotal() {
+        return total;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getPid() {
+        return pid;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail == null ? null : detail.trim();
+    public void setPid(String pid) {
+        this.pid = pid == null ? null : pid.trim();
     }
 
-    public String getPic() {
-        return pic;
+    public String getOid() {
+        return oid;
     }
 
-    public void setPic(String pic) {
-        this.pic = pic == null ? null : pic.trim();
-    }
-
-    public Date getCreatetime() {
-        return createtime;
-    }
-
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setOid(String oid) {
+        this.oid = oid == null ? null : oid.trim();
     }
 }

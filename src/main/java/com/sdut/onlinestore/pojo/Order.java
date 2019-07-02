@@ -3,53 +3,73 @@ package com.sdut.onlinestore.pojo;
 import java.util.Date;
 
 public class Order {
-    private Integer id;
+    private String oid;
 
-    private Integer userId;
+    private String uid;
 
-    private String number;
+    private Date ordertime;
 
-    private Date createtime;
+    private Double total;
 
-    private String note;
+    private Integer state;
 
-    public Integer getId() {
-        return id;
+    private String address;
+
+    private String telephone;
+
+    public String getOid() {
+        return oid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setOid(String oid) {
+        this.oid = oid == null ? null : oid.trim();
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getUid() {
+        return uid;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUid(String uid) {
+        this.uid = uid == null ? null : uid.trim();
     }
 
-    public String getNumber() {
-        return number;
+    public Date getOrdertime() {
+        return ordertime;
     }
 
-    public void setNumber(String number) {
-        this.number = number == null ? null : number.trim();
+    public void setOrdertime(Date ordertime) {
+        this.ordertime = ordertime;
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Double getTotal() {
+        return total;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
-    public String getNote() {
-        return note;
+    public Integer getState() {
+        return state;
     }
 
-    public void setNote(String note) {
-        this.note = note == null ? null : note.trim();
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address == null ? null : address.trim();
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone == null ? null : telephone.trim();
     }
 }

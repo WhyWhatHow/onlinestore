@@ -14,6 +14,9 @@
                         connectionURL="jdbc:mysql://localhost:3306/onlinestore?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC"
                         userId="root"
                         password="aa12321.">
+
+            <property name="nullCatalogMeansCurrent" value="true"/>
+
         </jdbcConnection>
         <!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
             connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg"
