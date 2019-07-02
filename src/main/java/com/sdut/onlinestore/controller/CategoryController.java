@@ -1,7 +1,9 @@
 package com.sdut.onlinestore.controller;
 
 import com.sdut.onlinestore.pojo.Category;
+import com.sdut.onlinestore.service.CategoryService;
 import com.sdut.onlinestore.utils.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 public class CategoryController {
+
+    @Autowired
+    CategoryService service ;
     /**
      * @return com.sdut.onlinestore.utils.Result
      * @Author whywhathow
@@ -63,4 +68,8 @@ public class CategoryController {
     }
 
 
+    @RequestMapping("/all")
+    public Result getAllCategory(){
+        return  service.getAll();
+    }
 }

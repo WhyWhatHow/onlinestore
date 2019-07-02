@@ -1,4 +1,4 @@
-package com.sdut.onlinestore.controller.impl;
+package com.sdut.onlinestore.service.impl;
 
 import com.sdut.onlinestore.mapper.UserMapper;
 import com.sdut.onlinestore.pojo.User;
@@ -8,7 +8,6 @@ import com.sdut.onlinestore.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.security.provider.MD5;
 
 import java.io.UnsupportedEncodingException;
 import java.util.UUID;

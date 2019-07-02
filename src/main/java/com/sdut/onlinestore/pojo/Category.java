@@ -1,6 +1,11 @@
 package com.sdut.onlinestore.pojo;
 
+import com.sun.tools.javac.util.List;
+
+import java.util.ArrayList;
+
 public class Category {
+
     private Integer cid;
 
     private String cname;
@@ -8,6 +13,27 @@ public class Category {
     private Integer parentid;
 
     private String location;
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "cid=" + cid +
+                ", cname='" + cname + '\'' +
+                ", parentid=" + parentid +
+                ", location='" + location + '\'' +
+                ", chridernList=" + chridernList +
+                '}';
+    }
+
+    public ArrayList<Category> getChridernList() {
+        return chridernList;
+    }
+
+    public void setChridernList(ArrayList<Category> chridernList) {
+        this.chridernList = chridernList;
+    }
+
+    private ArrayList<Category> chridernList ;
 
     public Integer getCid() {
         return cid;

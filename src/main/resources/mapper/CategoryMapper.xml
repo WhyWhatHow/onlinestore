@@ -68,6 +68,9 @@
   <sql id="Base_Column_List" >
     cid, cname, parentId, location
   </sql>
+  <select id="selectAll" resultType="category">
+    select  * from category ;
+  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sdut.onlinestore.pojo.CategoryExample" >
     select
     <if test="distinct" >

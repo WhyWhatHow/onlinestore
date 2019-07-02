@@ -4,6 +4,17 @@ public class Result {
 
     private boolean success;
     private Integer code; // 網絡返回是否成功
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "success=" + success +
+                ", code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
+    }
+
     private String message;
     private Object data;
 
