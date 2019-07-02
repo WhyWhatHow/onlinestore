@@ -1,0 +1,69 @@
+spring:
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:  jdbc:mysql://localhost:3306/onlinestore?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: aa12321.
+    type: com.alibaba.druid.pool.DruidDataSource
+#      initial-size: 5
+#      min-idle: 5
+#      max-idle: 10
+#      max-active: 30
+    druid:
+        initial-size: 8
+        min-idle: 1
+        max-active: 20
+        max-wait: 60000
+        time-between-eviction-runsMillis: 60000
+        min-evictable-idle-timeMillis: 300000
+       # validation-query: select 'x' FROM DUAL
+       # test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        pool-prepared-statements: true
+        max-open-prepared-statements: 20
+        max-pool-prepared-statement-per-connection-size: 20
+        filters: stat
+        connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+        use-global-data-source-stat: true
+
+
+server:
+  port: 80
+  tomcat:
+    uri-encoding: UTF-8
+
+mybatis:
+  type-aliases-package: com.example.demo.bean
+  # mapper-locations: com.example.demo.mapper
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl:  org.apache.ibatis.logging.stdout.StdOutImpl
+
+# pageHelper 配置,
+pagehelper:
+  # dialect: ①
+  # 分页插件会自动检测当前的数据库链接，自动选择合适的分页方式（可以不设置）
+  helper-dialect: mysql
+  # 上面数据库设置后，下面的设置为true不会改变上面的结果（默认为true）
+  auto-dialect: true
+  page-size-zero: false # ②
+  reasonable: true # ③
+  # 默认值为 false，该参数对使用 RowBounds 作为分页参数时有效。（一般用不着）
+  offset-as-page-num: false
+  # 默认值为 false，RowBounds是否进行count查询（一般用不着）
+  row-bounds-with-count: false
+  #params: ④
+  #support-methods-arguments: 和params配合使用，具体可以看下面的讲解
+  # 默认值为 false。设置为 true 时，允许在运行时根据多数据源自动识别对应方言的分页
+  auto-runtime-dialect: false # ⑤
+  # 与auto-runtime-dialect配合使用
+  close-conn: true
+  # 用于控制默认不带 count 查询的方法中，是否执行 count 查询，这里设置为true后，total会为-1
+  default-count: false
+  #dialect-alias: ⑥
