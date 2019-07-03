@@ -6,11 +6,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @Mapper
 public interface UserMapper {
+
+    @Select("select rid from user where uid = #{uid}")
+    Integer selectByUserToRid(User user);
+
+
     int countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
@@ -25,6 +31,7 @@ public interface UserMapper {
 
     User selectByPrimaryKey(String uid);
 
+    @Select("select * from user where username =#{username}")
     User selectByUsername(String username);
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);

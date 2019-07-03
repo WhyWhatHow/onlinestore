@@ -1,6 +1,9 @@
 package com.sdut.onlinestore.service.impl;
 
+import com.sdut.onlinestore.mapper.MenuMapper;
 import com.sdut.onlinestore.mapper.UserMapper;
+import com.sdut.onlinestore.pojo.Menu;
+import com.sdut.onlinestore.pojo.Role;
 import com.sdut.onlinestore.pojo.User;
 import com.sdut.onlinestore.service.UserService;
 import com.sdut.onlinestore.utils.MD5Util;
@@ -9,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -57,7 +63,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result loginUser(User user) {
+    public Result loginUser(User user, HttpServletRequest request) {
 //        return null;
         Result result = new Result();
         result.setSuccess(false);
@@ -85,7 +91,10 @@ public class UserServiceImpl implements UserService {
         if (user1 != null) {
             if (encryption.equals(user1.getPassword())) {
                 result.setSuccess(true);
+                result.setData(user1);
+                request.getSession().setAttribute("uid", user1.getUid());
                 result.setMessage("Login In Success");
+
             } else {
                 result.setMessage("password or username is wrong!! ");
 
@@ -114,4 +123,61 @@ public class UserServiceImpl implements UserService {
         return result;
 
     }
+
+    @Autowired
+    MenuMapper menuMapper;
+
+    @Transactional
+    @Override
+    public Result getMenu(User user) {
+        Result result = new Result();
+        result.setSuccess(false);
+        Integer rid = null;
+        // !.获取用户对应的角色
+        try {
+            rid = mapper.selectByUserToRid(user);
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  -- get rid false in getMenuMethod");
+            return result;
+        }
+        Role role = new Role(rid);
+        // 获取 该角色对应的权限(所谓的菜单)
+        List<Menu> list = null;
+        try {
+            list = menuMapper.selectByRole(role);
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  -- get menu list false  in getMenu menthod");
+            return result;
+        }
+
+        // 处理菜单 , 注意 角色必须对应一个 根菜单
+        ArrayList<Menu> childrens = new ArrayList<>(50);
+        try {
+            childrens = getChildrens(0, list);
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  --");
+            return result;
+        }
+        result.setData(childrens);
+        result.setSuccess(true);
+        result.setCode(202);
+        result.setMessage("成功获取菜单数据");
+        return result;
+
+    }
+
+    public ArrayList<Menu> getChildrens(Integer parentId, List<Menu> list) {
+        ArrayList<Menu> arrayList = new ArrayList<>(100);
+        for (Menu cat : list) {
+            if (parentId == cat.getParentid()) {
+                cat.setChildrenList(getChildrens(cat.getId(), list));
+                arrayList.add(cat);
+            }
+        }
+        return arrayList;
+    }
+
 }

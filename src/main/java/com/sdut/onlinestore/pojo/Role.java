@@ -5,6 +5,10 @@ public class Role {
 
     private String rname;
 
+    public Role(Integer rid) {
+        this.rid = rid ;
+    }
+
     public Integer getRid() {
         return rid;
     }
@@ -19,5 +23,13 @@ public class Role {
 
     public void setRname(String rname) {
         this.rname = rname == null ? null : rname.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "rid=" + rid +
+                ", rname='" + rname + '\'' +
+                '}';
     }
 }

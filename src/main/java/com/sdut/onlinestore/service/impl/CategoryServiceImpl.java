@@ -32,12 +32,13 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categoryList = null;
         try {
 
-            categoryList = getChridrens(0, list);
+            categoryList = getChildrens(0, list);
         } catch (Exception e) {
             result.setCode(500);
             result.setMessage("Server's problem,  --");
             return result;
         }
+        // TODO redis 缓存数据库的设置
         result.setData(categoryList);
         result.setSuccess(true);
         result.setMessage("Success in selectAll category ");
@@ -52,11 +53,11 @@ public class CategoryServiceImpl implements CategoryService {
      * 后端:
      * @Param [parentId, list]
      **/
-    public ArrayList<Category> getChridrens(Integer parentId, List<Category> list) {
-        ArrayList<Category> arrayList = new ArrayList<>(100);
+    public ArrayList<Category> getChildrens(Integer parentId, List<Category> list) {
+        ArrayList<Category> arrayList = new ArrayList<>(50);
         for (Category cat : list) {
-            if (parentId == cat.getParentid() ) {
-                cat.setChridernList(getChridrens(cat.getCid(), list));
+            if (parentId == cat.getParentid()) {
+                cat.setChildernList(getChildrens(cat.getCid(), list));
                 arrayList.add(cat);
             }
 

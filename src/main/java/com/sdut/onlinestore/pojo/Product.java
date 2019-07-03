@@ -142,4 +142,24 @@ public class Product {
     public void setCname(String cname) {
         this.cname = cname == null ? null : cname.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "pid='" + pid + '\'' +
+                ", pname='" + pname + '\'' +
+                ", cid=" + cid +
+                ", stock=" + stock +
+                ", output=" + output +
+                ", price=" + price +
+                ", vipPrice=" + vipPrice +
+                ", discount=" + discount +
+                ", info='" + info + '\'' +
+                ", volume=" + volume +
+                ", viewNumber=" + viewNumber +
+                ", location='" + location + '\'' +
+                ", createTime=" + createTime +
+                ", cname='" + cname + '\'' +
+                '}';
+    }
 }

@@ -4,10 +4,13 @@ import com.sdut.onlinestore.pojo.User;
 import com.sdut.onlinestore.service.UserService;
 import com.sdut.onlinestore.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.Service;
 
 @RestController
@@ -49,8 +52,8 @@ public class UserController {
      * @Param [user]
      **/
     @RequestMapping("/login")
-    public Result loginUser(@RequestBody User user) {
-        return service.loginUser(user);
+    public Result loginUser(@RequestBody User user, HttpServletRequest request) {
+        return service.loginUser(user,request);
     }
 
     /**
@@ -77,5 +80,18 @@ public class UserController {
     @RequestMapping("/active")
     public Result activeUser(@RequestBody User user) {
         return null;
+    }
+
+    /**
+     * @Author whywhathow
+     * TODO:
+     * 前端:  提供当前的登录用户,信息 不准给我少uid
+     * 后端:
+     * @Param [user]
+     * @return com.sdut.onlinestore.utils.Result
+     **/
+    @RequestMapping("/role")
+    public Result getRole(@RequestBody User user) {
+        return service.getMenu(user);
     }
 }

@@ -11,6 +11,19 @@ public class Order {
 
     private Double total;
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "oid='" + oid + '\'' +
+                ", uid='" + uid + '\'' +
+                ", ordertime=" + ordertime +
+                ", total=" + total +
+                ", state=" + state +
+                ", address='" + address + '\'' +
+                ", telephone='" + telephone + '\'' +
+                '}';
+    }
+
     private Integer state;
 
     private String address;

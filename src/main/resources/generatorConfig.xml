@@ -52,14 +52,14 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- 指定数据库表 -->
-        <table schema="" tableName="category"></table>
-        <table schema="" tableName="item"></table>
-        <table schema="" tableName="order"></table>
-        <table schema="" tableName="permisssion"></table>
-        <table schema="" tableName="product"></table>
-        <table schema="" tableName="role"></table>
-        <table schema="" tableName="role_permission"></table>
-        <table schema="" tableName="user"></table>
+<!--        <table schema="" tableName="category"></table>-->
+<!--        <table schema="" tableName="item"></table>-->
+<!--        <table schema="" tableName="order"></table>-->
+<!--        <table schema="" tableName="product"></table>-->
+<!--        <table schema="" tableName="role"></table>-->
+<!--        <table schema="" tableName="role_permission"></table>-->
+<!--        <table schema="" tableName="user"></table>-->
+        <table schema="" tableName="menu"></table>
 
 
         <!-- 有些表的字段需要指定java类型

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface CategoryMapper {
+
+
     int countByExample(CategoryExample example);
 
     int deleteByExample(CategoryExample example);

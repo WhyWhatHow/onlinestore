@@ -21,19 +21,19 @@ public class Category {
                 ", cname='" + cname + '\'' +
                 ", parentid=" + parentid +
                 ", location='" + location + '\'' +
-                ", chridernList=" + chridernList +
+                ", ChildernList=" + ChildernList +
                 '}';
     }
 
-    public ArrayList<Category> getChridernList() {
-        return chridernList;
+    public ArrayList<Category> getChildernList() {
+        return ChildernList;
     }
 
-    public void setChridernList(ArrayList<Category> chridernList) {
-        this.chridernList = chridernList;
+    public void setChildernList(ArrayList<Category> ChildernList) {
+        this.ChildernList = ChildernList;
     }
 
-    private ArrayList<Category> chridernList ;
+    private ArrayList<Category> ChildernList ;
 
     public Integer getCid() {
         return cid;

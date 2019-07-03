@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public class CPUtils {
     //
-//    public  static Object getChridens(Integer parentId, ArrayList<T> list){
+//    public  static Object getChildens(Integer parentId, ArrayList<T> list){
 //        return  null;
 //    }
-    public List<Category> getChridrens(Integer parentId, List<Category> list) {
+    public List<Category> getChildrens(Integer parentId, List<Category> list) {
         List<Category> arrayList = new ArrayList(100);
         for (Category cat :
                 list) {
             if (parentId == cat.getParentid()) {
-                arrayList.addAll(getChridrens(cat.getCid(), cat.getChridernList()));
+                arrayList.addAll(getChildrens(cat.getCid(), cat.getChildernList()));
 
                 arrayList.add(cat);
             }

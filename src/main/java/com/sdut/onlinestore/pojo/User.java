@@ -35,6 +35,36 @@ public class User {
 
     private Integer rid;
 
+    public User(String username, String password) {
+            this.username  =username ;
+            this.password = password ;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid='" + uid + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", gender='" + gender + '\'' +
+                ", loginName='" + loginName + '\'' +
+                ", level=" + level +
+                ", realName='" + realName + '\'' +
+                ", birthday=" + birthday +
+                ", telphone='" + telphone + '\'' +
+                ", address='" + address + '\'' +
+                ", state=" + state +
+                ", code='" + code + '\'' +
+                ", updateTime=" + updateTime +
+                ", createTime=" + createTime +
+                ", rid=" + rid +
+                '}';
+    }
+
+    public User() {
+    }
+
     public String getUid() {
         return uid;
     }

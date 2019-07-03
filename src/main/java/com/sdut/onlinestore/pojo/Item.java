@@ -15,6 +15,17 @@ public class Item {
         return itemid;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemid='" + itemid + '\'' +
+                ", quantity=" + quantity +
+                ", total=" + total +
+                ", pid='" + pid + '\'' +
+                ", oid='" + oid + '\'' +
+                '}';
+    }
+
     public void setItemid(String itemid) {
         this.itemid = itemid == null ? null : itemid.trim();
     }
