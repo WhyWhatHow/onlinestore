@@ -3,8 +3,13 @@ package com.sdut.onlinestore.mapper;
 import com.sdut.onlinestore.pojo.Role;
 import com.sdut.onlinestore.pojo.RoleExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Mapper
 public interface RoleMapper {
     int countByExample(RoleExample example);
 

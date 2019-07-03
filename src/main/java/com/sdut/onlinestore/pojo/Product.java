@@ -3,6 +3,36 @@ package com.sdut.onlinestore.pojo;
 import java.util.Date;
 
 public class Product {
+    @Override
+    public String toString() {
+        return "Product{" +
+                "cat=" + category +
+                ", pid='" + pid + '\'' +
+                ", pname='" + pname + '\'' +
+                ", cid=" + cid +
+                ", stock=" + stock +
+                ", output=" + output +
+                ", price=" + price +
+                ", vipPrice=" + vipPrice +
+                ", discount=" + discount +
+                ", info='" + info + '\'' +
+                ", volume=" + volume +
+                ", viewNumber=" + viewNumber +
+                ", location='" + location + '\'' +
+                ", createTime=" + createTime +
+                ", cname='" + cname + '\'' +
+                '}';
+    }
+
+    public Category getCat() {
+        return category;
+    }
+
+    public void setCat(Category cat) {
+        this.category = cat;
+    }
+
+    private  Category category ;
     private String pid;
 
     private String pname;
@@ -91,7 +121,7 @@ public class Product {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void  setDiscount(Double discount) {
         this.discount = discount;
     }
 
@@ -143,23 +173,4 @@ public class Product {
         this.cname = cname == null ? null : cname.trim();
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "pid='" + pid + '\'' +
-                ", pname='" + pname + '\'' +
-                ", cid=" + cid +
-                ", stock=" + stock +
-                ", output=" + output +
-                ", price=" + price +
-                ", vipPrice=" + vipPrice +
-                ", discount=" + discount +
-                ", info='" + info + '\'' +
-                ", volume=" + volume +
-                ", viewNumber=" + viewNumber +
-                ", location='" + location + '\'' +
-                ", createTime=" + createTime +
-                ", cname='" + cname + '\'' +
-                '}';
-    }
 }

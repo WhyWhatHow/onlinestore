@@ -85,8 +85,8 @@ public class UserController {
     /**
      * @Author whywhathow
      * TODO:
-     * 前端:  提供当前的登录用户,信息 不准给我少uid
-     * 后端:
+     * 前端: 提供当前的登录用户,信息 不准给我少uid (登录成功后,我把uid 存进httpsession里去了,LoginUser方法中我也把登录的用户存进result.data里
+     * 后端:  后台系统用户菜单的项的获取, {[{}]} 形式, 递归的性实现
      * @Param [user]
      * @return com.sdut.onlinestore.utils.Result
      **/

@@ -5,8 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
-public class MD5Util {
+public  class MD5Util {
 
     private MD5Util() {
     }
@@ -34,8 +35,13 @@ public class MD5Util {
         }
         return result;
     }
+
+    public static String setUUID() {
+        return UUID.randomUUID().toString().replace("-", "").toLowerCase();
+    }
+
     @Test
-    public  void test() throws UnsupportedEncodingException {
+    public void test() throws UnsupportedEncodingException {
         String encryption = MD5Util.getEncryption("123456789");
         System.out.println(encryption);
         System.out.println(encryption.length());

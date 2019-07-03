@@ -1,7 +1,9 @@
 package com.sdut.onlinestore.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.sdut.onlinestore.pojo.User;
 import com.sdut.onlinestore.service.CategoryService;
+import com.sdut.onlinestore.service.ProductService;
 import com.sdut.onlinestore.service.UserService;
 import com.sdut.onlinestore.utils.Result;
 import org.junit.jupiter.api.Test;
@@ -34,6 +36,20 @@ class CategoryServiceImplTest {
 //                (List) menu.getData()) {
 //            System.err.println(obj);
 //        }
+    }
+
+    @Autowired
+    ProductService productService;
+
+    @Test
+    void getProduct() {
+        Result result = productService.selectByDefault(1, 10);
+        for (Object obj :
+                ((PageInfo) result.getData()).getList()) {
+            System.err.println(obj);
+
+        }
+
     }
 
     @Test

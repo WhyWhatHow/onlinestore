@@ -3,9 +3,20 @@ package com.sdut.onlinestore.mapper;
 import com.sdut.onlinestore.pojo.Product;
 import com.sdut.onlinestore.pojo.ProductExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Mapper
 public interface ProductMapper {
+
+    @Select("select * from product")
+    List<Product> selectAll();
+
+
     int countByExample(ProductExample example);
 
     int deleteByExample(ProductExample example);
@@ -27,4 +38,6 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+    @Select("select count(pid) from product")
+    long selectCount();
 }
