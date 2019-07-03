@@ -6,6 +6,16 @@ import java.util.ArrayList;
 
 public class Category {
 
+    private Boolean isDeleted;
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
     private Integer cid;
 
     private String cname;

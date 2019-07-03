@@ -1,5 +1,6 @@
 package com.sdut.onlinestore.mapper;
 
+import com.sdut.onlinestore.pojo.Category;
 import com.sdut.onlinestore.pojo.Product;
 import com.sdut.onlinestore.pojo.ProductExample;
 import java.util.List;
@@ -40,4 +41,8 @@ public interface ProductMapper {
     int updateByPrimaryKey(Product record);
     @Select("select count(pid) from product")
     long selectCount();
+    @Select("select count(pid) from product where cid =#{cid}")
+    long selectCountByCategory(Category  category );
+    @Select("select * from product where cid = #{cid}")
+    List<Product> selectByCategory(Category category);
 }

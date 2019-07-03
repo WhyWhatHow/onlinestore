@@ -9,8 +9,11 @@ import com.sdut.onlinestore.pojo.Product;
 import com.sdut.onlinestore.service.ProductService;
 import com.sdut.onlinestore.utils.MD5Util;
 import com.sdut.onlinestore.utils.Result;
+import com.sdut.onlinestore.vo.CategoryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -24,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 //        PageHelper
         PageInfo<Product> of = null;
         try {
-            Page<Object> page = PageHelper.startPage(start, rows);
+            PageHelper.startPage(start, rows);
             of = PageInfo.of(mapper.selectAll());
             of.setTotal(mapper.selectCount());
             System.err.println(of);
@@ -87,6 +90,35 @@ public class ProductServiceImpl implements ProductService {
         result.setData(1);
         result.setMessage("Success in add Product ,");
         return result;
+    }
+
+
+    @Override
+    public Result selectByCategory(CategoryVo category) {
+        Result result = new Result();
+        result.setSuccess(false);
+        List<Product> list = null;
+        PageInfo<Product > of = null ;
+        try {
+            PageHelper.startPage(category.getStart(), category.getRows());
+//            list = mapper.selectByCategory(category.getCategory());
+            of =PageInfo.of(mapper.selectByCategory(category.getCategory()));
+            of.setTotal(mapper.selectCountByCategory(category.getCategory()));
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  -- get product  by category ");
+            return result;
+        }
+        result.setCode(202);
+        if (list.size() == 0 || list == null) {
+            result.setMessage("抱歉,该分类暂时没有商品, 请联系管理员进行添加");
+        } else {
+            result.setSuccess(true);
+            result.setMessage("通过分类获取用户商品成功");
+            result.setData(of);
+        }
+        return result;
+
     }
 
 

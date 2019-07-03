@@ -2,7 +2,9 @@ package com.sdut.onlinestore.controller;
 
 import com.sdut.onlinestore.pojo.Category;
 import com.sdut.onlinestore.service.CategoryService;
+import com.sdut.onlinestore.service.ProductService;
 import com.sdut.onlinestore.utils.Result;
+import com.sdut.onlinestore.vo.CategoryVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,19 +54,25 @@ public class CategoryController {
      */
     @RequestMapping("/update")
     public Result updateCategory(@RequestBody  Category category) {
-        return null;
+
+            return null;
+
     }
+    @Autowired
+    ProductService productService ;
     /**
      * @Author whywhathow
-     * TODO: 暂时没有想法
-     * 前端:
-     * 后端:
+     * TODO: 用户点击某个category, 获取 商品列表
+     * 前端: {category: category,start:start, rows:rows}
+     * 后端:  PageInfo{list[],total,...}
      * @Param [category]
      * @return com.sdut.onlinestore.utils.Result
      **/
     @RequestMapping("/get")
-    public Result getCategory(@RequestBody Category category){
-        return  null ;
+    public Result getCategory(@RequestBody CategoryVo categoryVo){
+
+        return productService.selectByCategory(categoryVo);
+
     }
 
 

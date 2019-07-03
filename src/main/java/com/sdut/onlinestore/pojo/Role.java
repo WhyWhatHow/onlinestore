@@ -1,6 +1,17 @@
 package com.sdut.onlinestore.pojo;
 
 public class Role {
+
+
+    private Boolean isDeleted;
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
     private Integer rid;
 
     private String rname;

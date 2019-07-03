@@ -4,6 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
+
+    private Boolean isDeleted;
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
     private Integer id;
 
     private String name;

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,11 +33,12 @@ public class UserServiceImpl implements UserService {
         user.setUid(UUID.randomUUID().toString().replace("-", "").toLowerCase());
         int res = 0;
         // 添加用户
-
+        user.setCreateTime(new Date());
         // TODO  密码加密
         String password = null;
         try {
             password = MD5Util.getEncryption(user.getPassword());
+
         } catch (UnsupportedEncodingException e) {
 //            e.printStackTrace();
             result.setCode(500);
@@ -111,6 +113,7 @@ public class UserServiceImpl implements UserService {
         result.setSuccess(false);
         // 根据用户uid 修改信息, if 动态sql 所以好一点
         try {
+            user.setUpdateTime(new Date());
             mapper.updateByPrimaryKeySelective(user);
         } catch (Exception e) {
             result.setCode(500);

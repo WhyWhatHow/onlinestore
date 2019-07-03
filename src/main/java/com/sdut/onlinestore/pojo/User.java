@@ -65,6 +65,16 @@ public class User {
     public User() {
     }
 
+    private Boolean isDeleted;
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public String getUid() {
         return uid;
     }

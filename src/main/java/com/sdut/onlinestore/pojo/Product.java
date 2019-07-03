@@ -3,6 +3,17 @@ package com.sdut.onlinestore.pojo;
 import java.util.Date;
 
 public class Product {
+
+
+    private Boolean isDeleted;
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
     @Override
     public String toString() {
         return "Product{" +
