@@ -25,12 +25,13 @@ CREATE TABLE `category` (
   `cname` varchar(32) DEFAULT NULL COMMENT '分类名称',
   `parentId` int(11) DEFAULT NULL COMMENT '父类分类id',
   `location` varchar(100) DEFAULT NULL COMMENT '不知道呢..',
+  `is_deleted` tinyint(1) DEFAULT '0' COMMENT '分类是否被删除',
   PRIMARY KEY (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `category` */
 
-insert  into `category`(`cid`,`cname`,`parentId`,`location`) values (1,'手机数码',0,''),(2,'热门手机',1,''),(3,'热门电脑',1,''),(4,'数码配件',1,''),(5,'手机特惠',1,''),(6,'图书音像',0,''),(10,'小米手机',2,NULL),(11,'苹果手机',2,NULL);
+insert  into `category`(`cid`,`cname`,`parentId`,`location`,`is_deleted`) values (1,'手机数码',0,'',0),(2,'热门手机',1,'',0),(3,'热门电脑',1,'',0),(4,'数码配件',1,'',0),(5,'手机特惠',1,'',0),(6,'图书音像',0,'',0),(10,'小米手机',2,NULL,0),(11,'苹果手机',2,NULL,0);
 
 /*Table structure for table `item` */
 
@@ -61,12 +62,13 @@ CREATE TABLE `menu` (
   `uri` varchar(100) DEFAULT NULL COMMENT '权限所在路径',
   `parentId` int(11) DEFAULT '0' COMMENT '父类权限ip',
   `type` int(11) DEFAULT NULL COMMENT 'uri类型本地or 远程',
+  `is_deleted` tinyint(1) DEFAULT '0' COMMENT '菜单是否被删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `menu` */
 
-insert  into `menu`(`id`,`name`,`uri`,`parentId`,`type`) values (1,'分类管理',NULL,0,NULL),(2,'添加分类',NULL,1,NULL),(3,'删除分类',NULL,1,NULL),(4,'修改分类',NULL,1,NULL),(5,'商品管理',NULL,0,NULL),(6,'添加商品',NULL,5,NULL),(7,'修改商品',NULL,5,NULL),(8,'删除商品',NULL,5,NULL),(9,'用户管理',NULL,0,NULL),(10,'添加用户',NULL,9,NULL),(11,'修改用户',NULL,9,NULL),(12,'删除用户',NULL,9,NULL),(13,'角色管理',NULL,0,NULL),(14,'添加角色',NULL,13,NULL),(15,'修改角色',NULL,13,NULL),(16,'删除角色',NULL,13,NULL),(17,'权限管理',NULL,0,NULL),(18,'增加权限',NULL,17,NULL),(19,'删除权限',NULL,17,NULL),(20,'修改权限',NULL,17,NULL),(21,'订单管理',NULL,0,NULL),(22,'查看角色',NULL,13,NULL),(23,'查看用户',NULL,9,NULL),(24,'查看商品',NULL,5,NULL),(25,'查询分类',NULL,1,NULL),(26,'查询权限',NULL,17,NULL);
+insert  into `menu`(`id`,`name`,`uri`,`parentId`,`type`,`is_deleted`) values (1,'分类管理',NULL,0,NULL,0),(2,'添加分类',NULL,1,NULL,0),(3,'删除分类',NULL,1,NULL,0),(4,'修改分类',NULL,1,NULL,0),(5,'商品管理',NULL,0,NULL,0),(6,'添加商品',NULL,5,NULL,0),(7,'修改商品',NULL,5,NULL,0),(8,'删除商品',NULL,5,NULL,0),(9,'用户管理',NULL,0,NULL,0),(10,'添加用户',NULL,9,NULL,0),(11,'修改用户',NULL,9,NULL,0),(12,'删除用户',NULL,9,NULL,0),(13,'角色管理',NULL,0,NULL,0),(14,'添加角色',NULL,13,NULL,0),(15,'修改角色',NULL,13,NULL,0),(16,'删除角色',NULL,13,NULL,0),(17,'权限管理',NULL,0,NULL,0),(18,'增加权限',NULL,17,NULL,0),(19,'删除权限',NULL,17,NULL,0),(20,'修改权限',NULL,17,NULL,0),(21,'订单管理',NULL,0,NULL,0),(22,'查看角色',NULL,13,NULL,0),(23,'查看用户',NULL,9,NULL,0),(24,'查看商品',NULL,5,NULL,0),(25,'查询分类',NULL,1,NULL,0),(26,'查询权限',NULL,17,NULL,0);
 
 /*Table structure for table `order` */
 
@@ -106,12 +108,15 @@ CREATE TABLE `product` (
   `location` varchar(100) DEFAULT NULL COMMENT '图片或者视频地址',
   `create_time` datetime DEFAULT NULL COMMENT '入库时间',
   `cname` varchar(32) DEFAULT NULL COMMENT '分类编号',
+  `is_deleted` tinyint(1) DEFAULT '0' COMMENT '商品是否被删除',
   PRIMARY KEY (`pid`),
   KEY `cid` (`cid`),
   CONSTRAINT `product_ibfk_1` FOREIGN KEY (`cid`) REFERENCES `category` (`cid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `product` */
+
+insert  into `product`(`pid`,`pname`,`cid`,`stock`,`output`,`price`,`vip_price`,`discount`,`info`,`volume`,`view_number`,`location`,`create_time`,`cname`,`is_deleted`) values ('1','45',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('10','10',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('11','11',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('12','12',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('123','41',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('13','13',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('14','14',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('2','11',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('3','1',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('4','5',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('6','7',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('7','7',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('8','8',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),('9','9',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0);
 
 /*Table structure for table `role` */
 
@@ -120,12 +125,13 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `rid` int(11) NOT NULL AUTO_INCREMENT COMMENT '角色id',
   `rname` varchar(32) DEFAULT NULL COMMENT '角色名称',
+  `is_deleted` tinyint(1) DEFAULT '0' COMMENT '角色是否被删除',
   PRIMARY KEY (`rid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `role` */
 
-insert  into `role`(`rid`,`rname`) values (1,'admin'),(2,'shopper'),(3,'member');
+insert  into `role`(`rid`,`rname`,`is_deleted`) values (1,'admin',0),(2,'shopper',0),(3,'member',0);
 
 /*Table structure for table `role_menu` */
 
@@ -167,6 +173,7 @@ CREATE TABLE `user` (
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `rid` int(11) DEFAULT NULL COMMENT '用户角色',
+  `is_deleted` tinyint(1) DEFAULT '0' COMMENT '是否删除该用户',
   PRIMARY KEY (`uid`),
   KEY `rid` (`rid`),
   CONSTRAINT `user_ibfk_1` FOREIGN KEY (`rid`) REFERENCES `role` (`rid`)
@@ -174,7 +181,7 @@ CREATE TABLE `user` (
 
 /*Data for the table `user` */
 
-insert  into `user`(`uid`,`username`,`password`,`email`,`gender`,`login_name`,`level`,`real_name`,`birthday`,`telphone`,`address`,`state`,`code`,`update_time`,`create_time`,`rid`) values ('a1246488712131','lucy','aa12321.',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL);
+insert  into `user`(`uid`,`username`,`password`,`email`,`gender`,`login_name`,`level`,`real_name`,`birthday`,`telphone`,`address`,`state`,`code`,`update_time`,`create_time`,`rid`,`is_deleted`) values ('a1246488712131','lucy','aa12321.',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,1,0),('ca29ad0705a44b4ebdad965afa69946a','nash','cf10224c2845eb8d5439e7f66c9a196c',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
