@@ -1,5 +1,6 @@
 package com.sdut.onlinestore.mapper;
 
+import com.sdut.onlinestore.pojo.Role;
 import com.sdut.onlinestore.pojo.User;
 import com.sdut.onlinestore.pojo.UserExample;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,6 +18,8 @@ public interface UserMapper {
     @Select("select rid from user where uid = #{uid}")
     Integer selectByUserToRid(User user);
 
+    @Update("update user set rid=null where rid=#{role.rid}")
+    Integer deleteUserRole(@Param("role") Role role);
 
     int countByExample(UserExample example);
 

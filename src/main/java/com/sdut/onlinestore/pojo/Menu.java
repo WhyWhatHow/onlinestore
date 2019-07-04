@@ -14,8 +14,24 @@ public class Menu {
 
     private Integer type;
 
+    private boolean is_deleted;
+
     private ArrayList<Menu> childrenList;
 
+    public boolean isIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(boolean is_deleted) {
+        this.is_deleted = is_deleted;
+    }
+
+    public Menu(){
+
+    }
+    public Menu(Integer id){
+        this.id=id;
+    }
     @Override
     public String toString() {
         return "Menu{" +

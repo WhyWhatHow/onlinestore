@@ -7,9 +7,7 @@ import com.sdut.onlinestore.pojo.MenuExample;
 import java.util.List;
 
 import com.sdut.onlinestore.pojo.Role;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -18,6 +16,18 @@ public interface MenuMapper {
 
     @Select("select * from menu ,role_menu rm  where rid = #{rid} and rm.mid = menu.id")
     List<Menu> selectByRole(Role role);
+
+    @Select("select * from menu where is_deleted=false")
+    List<Menu> selectAllMenu();
+
+    @Insert("insert menu values(null,#{menu.name},#{menu.uri},#{menu.parentid},#{menu.type},{menu.is_deleted})")
+    Integer insertMenu(@Param("menu") Menu menu);
+
+    @Update("update menu set is_deleted = 1 where id=#{menu.id}")
+    Integer deleteMenu(@Param("menu") Menu menu);
+
+    @Delete("delete from role_menu where mid=#{menu.id}")
+    Integer deleteRoleMenuByMenu(@Param("menu") Menu menu);
 
     int countByExample(MenuExample example);
 
