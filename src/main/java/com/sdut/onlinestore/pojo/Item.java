@@ -1,19 +1,16 @@
 package com.sdut.onlinestore.pojo;
 
 public class Item {
+
     private String itemid;
 
     private Integer quantity;
 
     private Double total;
 
-    private String pid;
+    private Product product;
 
-    private String oid;
-
-    public String getItemid() {
-        return itemid;
-    }
+    private Order order;
 
     @Override
     public String toString() {
@@ -21,9 +18,33 @@ public class Item {
                 "itemid='" + itemid + '\'' +
                 ", quantity=" + quantity +
                 ", total=" + total +
-                ", pid='" + pid + '\'' +
-                ", oid='" + oid + '\'' +
+                ", product=" + product +
+                ", order=" + order +
                 '}';
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+//
+//    private String pid;
+//
+//    private String oid;
+
+    public String getItemid() {
+        return itemid;
     }
 
     public void setItemid(String itemid) {
@@ -46,19 +67,4 @@ public class Item {
         this.total = total;
     }
 
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid == null ? null : pid.trim();
-    }
-
-    public String getOid() {
-        return oid;
-    }
-
-    public void setOid(String oid) {
-        this.oid = oid == null ? null : oid.trim();
-    }
 }

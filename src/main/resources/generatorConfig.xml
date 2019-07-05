@@ -40,7 +40,7 @@
         </javaModelGenerator>
         <!-- targetProject:mapper映射文件生成的位置 -->
         <sqlMapGenerator targetPackage="mapper"
-                         targetProject=".\src\main\resources\">
+                         targetProject=".\src">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
@@ -57,10 +57,9 @@
 <!--        <table schema="" tableName="order"></table>-->
 <!--        <table schema="" tableName="product"></table>-->
 <!--        <table schema="" tableName="role"></table>-->
-<!--        <table schema="" tableName="role_permission"></table>-->
 <!--        <table schema="" tableName="user"></table>-->
-        <table schema="" tableName="menu"></table>
-
+<!--        <table schema="" tableName="menu"></table>-->
+    <table schema="" tableName="cartItem"> </table>
 
         <!-- 有些表的字段需要指定java类型
          <table schema="" tableName="">

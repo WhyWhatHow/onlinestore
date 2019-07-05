@@ -2,9 +2,10 @@ package com.sdut.onlinestore.pojo;
 
 import com.sun.tools.javac.util.List;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Category {
+public class Category  implements Serializable {
 
     private Boolean isDeleted;
 

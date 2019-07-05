@@ -9,6 +9,7 @@ import com.sdut.onlinestore.service.UserService;
 import com.sdut.onlinestore.utils.MD5Util;
 import com.sdut.onlinestore.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,7 +65,9 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+
     @Override
+//    @Cacheable(value = "userzzz")
     public Result loginUser(User user, HttpServletRequest request) {
 //        return null;
         Result result = new Result();
@@ -94,7 +97,7 @@ public class UserServiceImpl implements UserService {
             if (encryption.equals(user1.getPassword())) {
                 result.setSuccess(true);
                 result.setData(user1);
-                request.getSession().setAttribute("uid", user1.getUid());
+                request.getSession().setAttribute("user", user1);
                 result.setMessage("Login In Success");
 
             } else {

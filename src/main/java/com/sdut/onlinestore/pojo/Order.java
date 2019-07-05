@@ -1,29 +1,54 @@
 package com.sdut.onlinestore.pojo;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Order {
+
+    private User user ;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private String oid;
 
-    private String uid;
+//    private String uid;
 
     private Date ordertime;
 
     private Double total;
 
+    public List<Item> getList() {
+        return list;
+    }
+
+    public void setList(List<Item> list) {
+        this.list = list;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
-                "oid='" + oid + '\'' +
-                ", uid='" + uid + '\'' +
+                "user=" + user +
+                ", oid='" + oid + '\'' +
                 ", ordertime=" + ordertime +
                 ", total=" + total +
+                ", list=" + list +
                 ", state=" + state +
                 ", address='" + address + '\'' +
                 ", telephone='" + telephone + '\'' +
                 '}';
     }
 
+    private List<Item> list = new ArrayList<>();
+
+    // 0 生成订单,(未确定收货地址) 1. 确认订单(未付款)  2. 付款未发货,  3. 发货已收到
     private Integer state;
 
     private String address;
@@ -38,13 +63,13 @@ public class Order {
         this.oid = oid == null ? null : oid.trim();
     }
 
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid == null ? null : uid.trim();
-    }
+//    public String getUid() {
+//        return uid;
+//    }
+//
+//    public void setUid(String uid) {
+//        this.uid = uid == null ? null : uid.trim();
+//    }
 
     public Date getOrdertime() {
         return ordertime;

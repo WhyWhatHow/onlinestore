@@ -4,6 +4,8 @@ import com.sdut.onlinestore.pojo.User;
 import com.sdut.onlinestore.service.UserService;
 import com.sdut.onlinestore.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +22,14 @@ public class UserController {
     @Autowired
     UserService service;
 
+    @Autowired
+    RedisTemplate redisTemplate;
     @RequestMapping("/hello")
-    public String  hello(){
-        return "hello, world";
+    public User  hello(){
+
+        ValueOperations<String, User> operations = redisTemplate.opsForValue();
+        User userzzz = operations.get("userzzz");
+        return userzzz;
     }
 
     @RequestMapping("/update")

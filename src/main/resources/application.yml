@@ -23,6 +23,8 @@ spring:
       min-evictable-idle-timeMillis: 300000
       # validation-query: select 'x' FROM DUAL
       # test-while-idle: true
+
+      testWhileIdle: true
       test-on-borrow: false
       test-on-return: false
       pool-prepared-statements: true

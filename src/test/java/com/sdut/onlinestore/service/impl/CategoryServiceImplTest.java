@@ -27,9 +27,9 @@ class CategoryServiceImplTest {
 
     @Test
     void getMenu() {
-        User u = new User("nash", "aa12321.");
-//        userService.registerUser(u);
-        u.setUid("ca29ad0705a44b4ebdad965afa69946a");
+        User u = new User("icon", "aa12321.");
+        userService.registerUser(u);
+//        u.setUid("ca29ad0705a44b4ebdad965afa69946a");
 //        Result result = userService.loginUser(u, request);
 //        System.err.println(result.getMessage());
 //        Result menu = userService.getMenu(u);

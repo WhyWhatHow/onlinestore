@@ -1,6 +1,8 @@
 package com.sdut.onlinestore.utils;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result  implements Serializable {
 
     private boolean success;
     private Integer code; // 網絡返回是否成功

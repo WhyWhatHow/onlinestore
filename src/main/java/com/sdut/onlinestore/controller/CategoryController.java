@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryController {
 
     @Autowired
-    CategoryService service ;
+    CategoryService service;
+
     /**
      * @return com.sdut.onlinestore.utils.Result
      * @Author whywhathow
@@ -28,8 +29,7 @@ public class CategoryController {
      **/
     @RequestMapping("/add")
     public Result insertCategory(@RequestBody Category category) {
-
-        return null;
+        return service.insertCategory(category);
     }
 
     /**
@@ -49,35 +49,37 @@ public class CategoryController {
      * TODO: 修改category
      * 后端: 通过category 修改category 对应的属性
      * 前端: 通过判断 result.success 对象进行判断
+     *
      * @param category
      * @return result ,
      */
     @RequestMapping("/update")
-    public Result updateCategory(@RequestBody  Category category) {
+    public Result updateCategory(@RequestBody Category category) {
 
-            return null;
+        return service.updateCategory(category);
 
     }
+
     @Autowired
-    ProductService productService ;
+    ProductService productService;
+
     /**
+     * @return com.sdut.onlinestore.utils.Result
      * @Author whywhathow
      * TODO: 用户点击某个category, 获取 商品列表
      * 前端: {category: category,start:start, rows:rows}
      * 后端:  PageInfo{list[],total,...}
      * @Param [category]
-     * @return com.sdut.onlinestore.utils.Result
      **/
+
     @RequestMapping("/get")
-    public Result getCategory(@RequestBody CategoryVo categoryVo){
-
+    public Result getCategory(@RequestBody CategoryVo categoryVo) {
         return productService.selectByCategory(categoryVo);
-
     }
 
 
     @RequestMapping("/all")
-    public Result getAllCategory(){
-        return  service.getAll();
+    public Result getAllCategory() {
+        return service.getAll();
     }
 }
