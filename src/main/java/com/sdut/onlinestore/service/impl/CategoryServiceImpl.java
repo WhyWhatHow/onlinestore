@@ -5,6 +5,7 @@ import com.sdut.onlinestore.pojo.Category;
 import com.sdut.onlinestore.service.CategoryService;
 import com.sdut.onlinestore.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class CategoryServiceImpl implements CategoryService {
     private RedisTemplate<String, Serializable> redisTemplate;
 
     @Override
-//    @Cacheable(value = "category")
+//    @Cacheable(value = "category") 启用缓存
     public Result getAll() {
         // 如果缓存服务器中存在category对象
         Result result = (Result) redisTemplate.opsForValue().get("category");
@@ -63,7 +64,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Result insertCategory(Category category) {
+//    @CacheEvict  // 删除缓存
+    public Result  insertCategory(Category category) {
         Result result = new Result();
         result.setSuccess(false);
         int res = 0;
@@ -86,6 +88,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+//    @CacheEvict 删除缓存
     public Result updateCategory(Category category) {
         Result result = new Result();
         result.setSuccess(false);

@@ -39,14 +39,17 @@ public interface ItemMapper {
 
     @Select("select * from item  i,product p where  p.pid = o.pid and o.oid = ?")
     List<Item> selectByOid(String oid);
-
-    @Select("<script> " +
-            "select id, resource_name as resourceName, resource_type as resourceType from t_resource_dic where dic_type = #{ditType} and resource_type " +
-            "in <foreach item='item' index='index' collection='resources' open='(' separator=',' close=')'> #{item} </foreach> " +
-            "</script>")
+//
+//    @Select("<script> " +
+//            "select id, resource_name as resourceName, resource_type as resourceType from t_resource_dic where dic_type = #{ditType} and resource_type " +
+//            "in <foreach item='item' index='index' collection='resources' open='(' separator=',' close=')'> #{item} </foreach> " +
+//            "</script>")
 //    List<ResourceDicVo> getResourceDics(@Param("resources")List<Integer> resources, @Param("ditType")Integer ditType);
 
-    @Insert("<script>"+"insert into item values <foreach item='item' index ='index' collections='list'  open='(' separator=',' close=')'> #{item.itemid},#{item.quantity},#{item.total},#{item.product.pid},#{item.order.oid} " )
+    @Insert("<script>" + "" +
+            "insert into item values <foreach item='item' index ='index' collections='list' " +
+            " open='(' separator=',' close=')'> " +
+            "#{item.itemid},#{item.quantity},#{item.total},#{item.product.pid},#{item.order.oid}</foreach> " + "</script>")
     int insertByList(@Param("list") List<Item> list);
 
 //    List<Item> selectItemByOidList(@Param("order") List<Order> list);

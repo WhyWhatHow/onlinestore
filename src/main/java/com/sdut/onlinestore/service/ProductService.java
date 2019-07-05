@@ -14,4 +14,5 @@ public interface ProductService {
     Result insertProduct(Product product, Category category);
 
     Result selectByCategory(CategoryVo category);
+
 }

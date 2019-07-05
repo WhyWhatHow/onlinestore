@@ -159,7 +159,7 @@ public class CartServiceImpl implements CartService {
         result.setSuccess(true);
         result.setCode(202);
         result.setMessage("Success in delete cartItem item ");
-        redisTemplate.opsForValue().set("cartItem", null);
+        redisTemplate.opsForValue().set("cart", null);
         return result;
     }
 

@@ -1,6 +1,5 @@
 package com.sdut.onlinestore.vo;
 
-import com.sdut.onlinestore.pojo.Cart;
 import com.sdut.onlinestore.pojo.CartItem;
 import com.sdut.onlinestore.pojo.User;
 

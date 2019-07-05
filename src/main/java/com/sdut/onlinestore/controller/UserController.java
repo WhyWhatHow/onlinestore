@@ -3,18 +3,18 @@ package com.sdut.onlinestore.controller;
 import com.sdut.onlinestore.pojo.User;
 import com.sdut.onlinestore.service.UserService;
 import com.sdut.onlinestore.utils.Result;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpRequest;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.Service;
-
+@Api(value = "用户登录,注册,激活相关操作")
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -24,15 +24,16 @@ public class UserController {
 
     @Autowired
     RedisTemplate redisTemplate;
-    @RequestMapping("/hello")
+    @GetMapping("/hello")
     public User  hello(){
 
         ValueOperations<String, User> operations = redisTemplate.opsForValue();
         User userzzz = operations.get("userzzz");
         return userzzz;
     }
+    @ApiOperation(value= "修改用户信息", notes = "提交数据为表单,封装的user对象")
 
-    @RequestMapping("/update")
+    @PostMapping("/update")
     public Result updateUser(@RequestBody User user) {
         return service.updateUser(user);
     }
@@ -58,10 +59,16 @@ public class UserController {
      * 后端:
      * @Param [user]
      **/
-    @RequestMapping("/login")
+    @ApiOperation(value = "用户登录" ,notes = "用户登录成功后,用户会被存在session中,result.data中我也有给你们返回")
+    @PostMapping("/login")
     public Result loginUser(@RequestBody User user, HttpServletRequest request) {
         return service.loginUser(user,request);
     }
+
+//    @GetMapping("/send")
+//    public Result sendToActiveUser(){
+//        return null ;
+//    }
 
     /**
      * @return com.sdut.onlinestore.utils.Result
@@ -71,7 +78,8 @@ public class UserController {
      * 后端: 默认数据有效,非空,"",null去空格
      * @Param [user]
      **/
-    @RequestMapping("/reg")
+    @ApiOperation(value = "用户注册" )
+    @PostMapping("/reg")
     public Result registerUser(@RequestBody User user) {
         return service.registerUser(user);
     }
@@ -84,10 +92,10 @@ public class UserController {
      * 后端:
      * @Param [user]
      **/
-    @RequestMapping("/active")
-    public Result activeUser(@RequestBody User user) {
-        return null;
-    }
+//    @RequestMapping("/active")
+//    public Result activeUser(@RequestBody User user) {
+//        return null;
+//    }
 
     /**
      * @Author whywhathow
@@ -97,7 +105,8 @@ public class UserController {
      * @Param [user]
      * @return com.sdut.onlinestore.utils.Result
      **/
-    @RequestMapping("/role")
+
+    @PostMapping("/role")
     public Result getRole(@RequestBody User user) {
         return service.getMenu(user);
     }

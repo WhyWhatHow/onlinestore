@@ -98,11 +98,11 @@ public class ProductServiceImpl implements ProductService {
         Result result = new Result();
         result.setSuccess(false);
         List<Product> list = null;
-        PageInfo<Product > of = null ;
+        PageInfo<Product> of = null;
         try {
             PageHelper.startPage(category.getStart(), category.getRows());
 //            list = mapper.selectByCategory(category.getCategory());
-            of =PageInfo.of(mapper.selectByCategory(category.getCategory()));
+            of = PageInfo.of(mapper.selectByCategory(category.getCategory()));
             of.setTotal(mapper.selectCountByCategory(category.getCategory()));
         } catch (Exception e) {
             result.setCode(500);
@@ -118,8 +118,8 @@ public class ProductServiceImpl implements ProductService {
             result.setData(of);
         }
         return result;
-
     }
+
 
 
 }

@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
         int res = 0;
         // 添加用户
         user.setCreateTime(new Date());
+        user.setState(false);
         // TODO  密码加密
         String password = null;
         try {

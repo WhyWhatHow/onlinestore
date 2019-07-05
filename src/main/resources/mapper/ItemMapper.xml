@@ -208,4 +208,5 @@
       oid = #{oid,jdbcType=VARCHAR}
     where itemid = #{itemid,jdbcType=VARCHAR}
   </update>
+
 </mapper>

@@ -1,16 +1,17 @@
 package com.sdut.onlinestore.controller;
 
 import com.sdut.onlinestore.pojo.Category;
+import com.sdut.onlinestore.pojo.Product;
 import com.sdut.onlinestore.service.CategoryService;
 import com.sdut.onlinestore.service.ProductService;
 import com.sdut.onlinestore.utils.Result;
 import com.sdut.onlinestore.vo.CategoryVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@Api("商品分类的相关接口")
 @RequestMapping("/category")
 @CrossOrigin
 @RestController
@@ -27,7 +28,8 @@ public class CategoryController {
      * 后端:
      * @Param [category]
      **/
-    @RequestMapping("/add")
+    @ApiOperation(value = "填写表单添加一个分类")
+    @PostMapping("/add")
     public Result insertCategory(@RequestBody Category category) {
         return service.insertCategory(category);
     }
@@ -40,7 +42,8 @@ public class CategoryController {
      * 后端:  返回一个result.data 封装的是数组
      * @Param [category]
      **/
-    @RequestMapping("/del")
+    @ApiOperation(value = "删除 一个分类")
+    @DeleteMapping("/del")
     public Result deleteCategory(@RequestBody Category category) {
         return null;
     }
@@ -53,7 +56,8 @@ public class CategoryController {
      * @param category
      * @return result ,
      */
-    @RequestMapping("/update")
+    @ApiOperation("更新一个分类")
+    @PostMapping("/update")
     public Result updateCategory(@RequestBody Category category) {
 
         return service.updateCategory(category);
@@ -71,14 +75,14 @@ public class CategoryController {
      * 后端:  PageInfo{list[],total,...}
      * @Param [category]
      **/
-
-    @RequestMapping("/get")
+    @ApiOperation(value = "通过商品分类获取商品信息", notes = "与http://ip/product/cat方法重复", response = Product.class)
+    @GetMapping("/get")
     public Result getCategory(@RequestBody CategoryVo categoryVo) {
         return productService.selectByCategory(categoryVo);
     }
 
-
-    @RequestMapping("/all")
+    @ApiOperation(value = "查询全部分类 ", notes = "返回的是一个list", response = Category.class)
+    @GetMapping("/all")
     public Result getAllCategory() {
         return service.getAll();
     }

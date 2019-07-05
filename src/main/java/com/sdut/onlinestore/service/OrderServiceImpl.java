@@ -43,6 +43,7 @@ public class OrderServiceImpl implements OrderService {
             System.err.println(item);
         }
         order.setList(list);
+        order.setState(0);
         System.err.println("------------------- error test ---------------------------------");
         return order;
     }
@@ -50,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public Result saveOrder(CartVo vo) {
+
         Result result = new Result();
         result.setSuccess(false);
         Order order = null;
@@ -79,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
             return result;
         }
         System.err.println(rr + "----------------------------------------");
-
+        //todo !!!  修改购物车表中的商品状态 is_deleted ->true
         result.setSuccess(true);
         result.setCode(202);
         result.setMessage("Success in save order ...");
