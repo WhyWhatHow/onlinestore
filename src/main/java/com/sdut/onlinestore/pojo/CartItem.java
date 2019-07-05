@@ -1,8 +1,9 @@
 package com.sdut.onlinestore.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CartItem {
+public class CartItem  implements Serializable {
     // pid , price , subtotal , num
 
     private Double price;
@@ -22,7 +23,7 @@ public class CartItem {
     }
 
     public void setSubTotal() {
-        this.subTotal = price * num;
+        this.subTotal = this.price * this.num;
     }
 
     public Boolean getFinished() {

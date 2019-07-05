@@ -111,13 +111,19 @@ public class CartServiceImpl implements CartService {
             result.setMessage(result.getMessage() + " redis.........................");
             return result;
         }
+        result = new Result();
+        // TODO 判断用户登录 ,改用拦截器 need be change
         // 判断用户是否已经登录
-        User user = (User) req.getSession().getAttribute("user");
-        if (user == null || StringUtils.isEmpty(user.getUid())) {
-            result.setMessage("error , no user login in , please login in ");
-            result.setCode(202);
-            return result;
-        }
+//        User user = (User) req.getSession().getAttribute("user");
+//        if (user == null || StringUtils.isEmpty(user.getUid())) {
+//            result.setMessage("error , no user login in , please login in ");
+//            result.setCode(202);
+//            return result;
+//        }
+        //TODo test need be change
+        User user = new User();
+        user.setUid("4b2f453be2534b538d4c9455064dfec7");
+        // todo finished
         // 获取购物车列表
         List<CartItem> cartItems = null;
         try {
@@ -128,17 +134,17 @@ public class CartServiceImpl implements CartService {
             return result;
         }
         result.setCode(202);
+        // todo wrong .. ..
         if (cartItems == null || cartItems.size() == 0) {
-            for (CartItem cai : cartItems) {
-                cai.setSubTotal();
-            }
 
             result.setMessage("你还没有添加任何商品呢, 请先添加商品然后再来查看购物车");
+        } else {
+
+            result.setData(cartItems);
+            result.setSuccess(true);
+            result.setMessage("Success in get CartItem");
+
         }
-        result.setSuccess(true);
-        result.setCode(202);
-        result.setMessage("Success in get CartItem");
-        result.setData(cartItems);
         redisTemplate.opsForValue().set("cart", result);
         return result;
     }

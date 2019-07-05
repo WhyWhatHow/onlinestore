@@ -24,15 +24,15 @@ spring:
       # validation-query: select 'x' FROM DUAL
       # test-while-idle: true
 
-      testWhileIdle: true
-      test-on-borrow: false
-      test-on-return: false
-      pool-prepared-statements: true
-      max-open-prepared-statements: 20
-      max-pool-prepared-statement-per-connection-size: 20
-      filters: stat
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      use-global-data-source-stat: true
+#      testWhileIdle: true
+#      test-on-borrow: false
+#      test-on-return: false
+#      pool-prepared-statements: true
+#      max-open-prepared-statements: 20
+#      max-pool-prepared-statement-per-connection-size: 20
+#      filters: stat
+#      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#      use-global-data-source-stat: true
 
 
 server:

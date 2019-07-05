@@ -1,9 +1,20 @@
 package com.sdut.onlinestore.pojo;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class User  implements Serializable {
+
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     private String uid;
 
@@ -31,9 +42,9 @@ public class User  implements Serializable {
 
     private String code;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private Integer rid;
 
@@ -181,19 +192,19 @@ public class User  implements Serializable {
         this.code = code == null ? null : code.trim();
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 

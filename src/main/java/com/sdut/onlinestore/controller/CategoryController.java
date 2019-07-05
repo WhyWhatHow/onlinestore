@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Api("商品分类的相关接口")
+@Api("商品分类的相关接口-- Pass")
 @RequestMapping("/category")
 @CrossOrigin
 @RestController
@@ -28,7 +28,10 @@ public class CategoryController {
      * 后端:
      * @Param [category]
      **/
-    @ApiOperation(value = "填写表单添加一个分类")
+    @ApiOperation(value = "填写表单添加一个分类,pass" ,notes = "{\n" +
+            "\t\"cname\":\"手环\",\n" +
+            "\t\"parentid\":0\n" +
+            "}" )
     @PostMapping("/add")
     public Result insertCategory(@RequestBody Category category) {
         return service.insertCategory(category);
@@ -42,10 +45,10 @@ public class CategoryController {
      * 后端:  返回一个result.data 封装的是数组
      * @Param [category]
      **/
-    @ApiOperation(value = "删除 一个分类")
-    @DeleteMapping("/del")
-    public Result deleteCategory(@RequestBody Category category) {
-        return null;
+    @ApiOperation(value = "删除 一个分类", notes = "未考虑级联删除的情况,所以删除存在问题")
+    @DeleteMapping("/del/{cid}")
+    public Result deleteCategory(@PathVariable("cid") Integer cid) {
+        return  service.deleteCategory(cid);
     }
 
     /**
@@ -56,7 +59,7 @@ public class CategoryController {
      * @param category
      * @return result ,
      */
-    @ApiOperation("更新一个分类")
+    @ApiOperation( value = "更新一个分类")
     @PostMapping("/update")
     public Result updateCategory(@RequestBody Category category) {
 
@@ -76,7 +79,7 @@ public class CategoryController {
      * @Param [category]
      **/
     @ApiOperation(value = "通过商品分类获取商品信息", notes = "与http://ip/product/cat方法重复", response = Product.class)
-    @GetMapping("/get")
+    @PostMapping("/get")
     public Result getCategory(@RequestBody CategoryVo categoryVo) {
         return productService.selectByCategory(categoryVo);
     }

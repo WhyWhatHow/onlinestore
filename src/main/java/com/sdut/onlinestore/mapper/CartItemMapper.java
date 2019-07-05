@@ -2,10 +2,8 @@ package com.sdut.onlinestore.mapper;
 
 import com.sdut.onlinestore.pojo.CartItem;
 import com.sdut.onlinestore.vo.CartItemVo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.sdut.onlinestore.vo.CartVo;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -31,4 +29,8 @@ public interface CartItemMapper {
 
     @Insert("INSERT INTO cart_item (uid,pid, pname,plocation,num,created) values(#{uid},#{pid},#{pname},#{plocation},#{num},#{created})")
     int insert(CartItem cartItem);
+    @Update("update cart_item set is_finished  =true where uid =#{uid} and id =#{id}")
+    int updateToFinished(Long id, String uid);
+//    @Update("update cart_item set is_finished = true where id = and uid =#{user.uid}")
+//    int updateToFinishedInList(@Par);
 }

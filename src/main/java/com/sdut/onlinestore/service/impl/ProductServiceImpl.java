@@ -67,6 +67,7 @@ public class ProductServiceImpl implements ProductService {
         } else {
             result.setMessage("error in update product");
         }
+        result.setData(res);
 
         return result;
 
@@ -74,43 +75,79 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Result insertProduct(Product product, Category category) {
+    public Result insertProduct(Product product) {
         Result result = new Result();
         result.setSuccess(false);
         try {
             product.setPid(MD5Util.setUUID());
-            product.setCat(category);
+//            product.setCat(category);
         } catch (Exception e) {
             result.setCode(500);
             result.setMessage("Server's problem,  -- add product ");
             return result;
         }
+        int res = 0;
+        try {
+            res = mapper.insertSelective(product);
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  --");
+            return result;
+        }
         result.setSuccess(true);
         result.setCode(202);
-        result.setData(1);
+        result.setData(res);
         result.setMessage("Success in add Product ,");
         return result;
     }
 
-
     @Override
-    public Result selectByCategory(CategoryVo category) {
+    public Result selectByLike(String pname) {
         Result result = new Result();
         result.setSuccess(false);
         List<Product> list = null;
-        PageInfo<Product> of = null;
         try {
-            PageHelper.startPage(category.getStart(), category.getRows());
+            list = mapper.selectByLike(pname);
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  --");
+            return result;
+        }
+        result.setCode(202);
+        if (list != null && list.size() != 0) {
+            result.setData(list);
+            result.setSuccess(true);
+            result.setMessage("Success in get product info ");
+        } else {
+            result.setMessage("No product contented !!!");
+        }
+
+        return result;
+
+    }
+
+
+    @Override
+    public Result selectByCategory(CategoryVo vo) {
+        Result result = new Result();
+        result.setSuccess(false);
+        PageInfo<Product> of = null;
+        System.err.println(vo);
+        try {
+            PageHelper.startPage(vo.getStart(), vo.getRows());
+            Integer cid = vo.getCategory().getCid();
+            System.err.println(cid);
 //            list = mapper.selectByCategory(category.getCategory());
-            of = PageInfo.of(mapper.selectByCategory(category.getCategory()));
-            of.setTotal(mapper.selectCountByCategory(category.getCategory()));
+            of = PageInfo.of(mapper.selectByCategory(cid));
+            of.setTotal(mapper.selectCountByCategory(cid));
         } catch (Exception e) {
             result.setCode(500);
             result.setMessage("Server's problem,  -- get product  by category ");
             return result;
         }
         result.setCode(202);
-        if (list.size() == 0 || list == null) {
+        List<Product> list = of.getList();
+        if (list == null || list.size() == 0) {
             result.setMessage("抱歉,该分类暂时没有商品, 请联系管理员进行添加");
         } else {
             result.setSuccess(true);
@@ -120,6 +157,34 @@ public class ProductServiceImpl implements ProductService {
         return result;
     }
 
+    @Override
+    public Result deleteByPid(String pid) {
+        Result result = new Result();
+        result.setSuccess(false);
+        int res = 0;
+        try {
+            res = mapper.updateToDeleted(pid);
+//            res = mapper.deleteByPrimaryKey(pid);
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  --");
+            return result;
+        }
+
+
+        result.setSuccess(true);
+        result.setCode(202);
+        result.setMessage("Success in delete Product");
+        result.setData(res);
+        return result;
+
+
+    }
+
+//    @Override
+//    public Result insertProduct(Product product) {
+//        return null;
+//    }
 
 
 }

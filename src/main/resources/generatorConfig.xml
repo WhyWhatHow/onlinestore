@@ -57,9 +57,9 @@
 <!--        <table schema="" tableName="order"></table>-->
 <!--        <table schema="" tableName="product"></table>-->
 <!--        <table schema="" tableName="role"></table>-->
-<!--        <table schema="" tableName="user"></table>-->
+        <table schema="" tableName="user"></table>
 <!--        <table schema="" tableName="menu"></table>-->
-    <table schema="" tableName="cartItem"> </table>
+<!--    <table schema="" tableName="cartItem"> </table>-->
 
         <!-- 有些表的字段需要指定java类型
          <table schema="" tableName="">

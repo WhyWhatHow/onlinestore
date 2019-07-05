@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Api(value = "订单的相关操作")
+@Api(value = "订单的相关接口")
 @RestController
 @RequestMapping("/order")
 @CrossOrigin

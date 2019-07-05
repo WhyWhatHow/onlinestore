@@ -9,6 +9,10 @@ public class UserWithBLOBs extends User {
 
     private String authenticationString;
 
+    public UserWithBLOBs(String username, String password) {
+        super(username, password);
+    }
+
     public byte[] getSslCipher() {
         return sslCipher;
     }

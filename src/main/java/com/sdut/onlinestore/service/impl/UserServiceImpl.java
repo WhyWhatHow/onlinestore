@@ -9,14 +9,13 @@ import com.sdut.onlinestore.service.UserService;
 import com.sdut.onlinestore.utils.MD5Util;
 import com.sdut.onlinestore.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,8 +33,11 @@ public class UserServiceImpl implements UserService {
         user.setUid(UUID.randomUUID().toString().replace("-", "").toLowerCase());
         int res = 0;
         // 添加用户
-        user.setCreateTime(new Date());
+        LocalDateTime now = LocalDateTime.now();
+        user.setCreateTime(now);
         user.setState(false);
+        user.setRid(3);//  默认角色
+
         // TODO  密码加密
         String password = null;
         try {
@@ -117,7 +119,7 @@ public class UserServiceImpl implements UserService {
         result.setSuccess(false);
         // 根据用户uid 修改信息, if 动态sql 所以好一点
         try {
-            user.setUpdateTime(new Date());
+            user.setUpdateTime(LocalDateTime.now());
             mapper.updateByPrimaryKeySelective(user);
         } catch (Exception e) {
             result.setCode(500);
@@ -142,7 +144,8 @@ public class UserServiceImpl implements UserService {
         Integer rid = null;
         // !.获取用户对应的角色
         try {
-            rid = mapper.selectByUserToRid(user);
+            rid =user.getRid();
+//            rid = mapper.selectByUserToRid(user);
         } catch (Exception e) {
             result.setCode(500);
             result.setMessage("Server's problem,  -- get rid false in getMenuMethod");
@@ -168,6 +171,12 @@ public class UserServiceImpl implements UserService {
             result.setMessage("Server's problem,  --");
             return result;
         }
+        System.err.println("=---------------------------------------=");
+        for (Menu menu : list) {
+            System.err.println(menu);
+
+        }
+        System.err.println("=---------------------------------------=");
         result.setData(childrens);
         result.setSuccess(true);
         result.setCode(202);
@@ -178,10 +187,10 @@ public class UserServiceImpl implements UserService {
 
     public ArrayList<Menu> getChildrens(Integer parentId, List<Menu> list) {
         ArrayList<Menu> arrayList = new ArrayList<>(100);
-        for (Menu cat : list) {
-            if (parentId == cat.getParentid()) {
-                cat.setChildrenList(getChildrens(cat.getId(), list));
-                arrayList.add(cat);
+        for (Menu menu : list) {
+            if (parentId == menu.getParentid()) {
+                menu.setChildrenList(getChildrens(menu.getId(), list));
+                arrayList.add(menu);
             }
         }
         return arrayList;

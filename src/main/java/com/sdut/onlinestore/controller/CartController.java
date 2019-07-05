@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@Api(value = "购物车服务")
+@Api(value = "购物车的相关接口")
 @RestController
 @CrossOrigin
 @RequestMapping("/cart")

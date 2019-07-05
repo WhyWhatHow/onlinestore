@@ -10,4 +10,6 @@ public interface CategoryService {
     Result insertCategory(Category category);
 
     Result updateCategory(Category category);
+
+    Result deleteCategory(Integer cid);
 }

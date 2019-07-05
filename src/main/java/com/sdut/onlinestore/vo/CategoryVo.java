@@ -7,6 +7,15 @@ public class CategoryVo {
     private Integer start = 1;
     private Integer rows = 10;
 
+    @Override
+    public String toString() {
+        return "CategoryVo{" +
+                "category=" + category +
+                ", start=" + start +
+                ", rows=" + rows +
+                '}';
+    }
+
     public CategoryVo() {
         this.start = 1;
         this.rows = 10;

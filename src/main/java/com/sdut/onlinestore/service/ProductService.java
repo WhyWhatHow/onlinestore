@@ -11,8 +11,13 @@ public interface ProductService {
 
     Result updateProduct(Product product);
 
-    Result insertProduct(Product product, Category category);
+//    Result insertProduct(Product product, Category category);
 
     Result selectByCategory(CategoryVo category);
 
+    Result deleteByPid(String pid);
+
+    Result insertProduct(Product product);
+
+    Result selectByLike(String pname);
 }

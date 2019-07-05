@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -37,6 +38,9 @@ public interface CategoryMapper {
 
     int updateByPrimaryKey(Category record);
 
-//   @Select("select * from category ")
+    //   @Select("select * from category ")
     List<Category> selectAll();
+
+    @Update("update  category set is_deleted = true where cid =#{cid}")
+    int updateTodelete(Integer cid);
 }

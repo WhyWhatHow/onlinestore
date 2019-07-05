@@ -360,6 +360,9 @@
       <if test="rid != null" >
         rid = #{rid,jdbcType=INTEGER},
       </if>
+      <if test="avatarUrl != null" >
+        avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      </if>
     </set>
     where uid = #{uid,jdbcType=VARCHAR}
   </update>

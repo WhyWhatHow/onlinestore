@@ -3,11 +3,13 @@ package com.sdut.onlinestore.mapper;
 import com.sdut.onlinestore.pojo.Category;
 import com.sdut.onlinestore.pojo.Product;
 import com.sdut.onlinestore.pojo.ProductExample;
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -39,10 +41,19 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
     @Select("select count(pid) from product")
     long selectCount();
+
     @Select("select count(pid) from product where cid =#{cid}")
-    long selectCountByCategory(Category  category );
+    long selectCountByCategory(Integer cid);
+
     @Select("select * from product where cid = #{cid}")
-    List<Product> selectByCategory(Category category);
+    List<Product> selectByCategory(Integer cid);
+
+    @Update("update product set is_deleted = true where pid =#{pid}")
+    int updateToDeleted(String pid);
+
+    @Select("select * from product where pname like concat('%',#{panme},'%')")
+    List<Product> selectByLike(String pname);
 }

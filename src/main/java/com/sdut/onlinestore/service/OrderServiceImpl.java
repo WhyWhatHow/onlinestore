@@ -2,6 +2,7 @@ package com.sdut.onlinestore.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sdut.onlinestore.mapper.CartItemMapper;
 import com.sdut.onlinestore.mapper.ItemMapper;
 import com.sdut.onlinestore.mapper.OrderMapper;
 import com.sdut.onlinestore.pojo.*;
@@ -10,10 +11,12 @@ import com.sdut.onlinestore.utils.Result;
 import com.sdut.onlinestore.vo.CartVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,6 +85,19 @@ public class OrderServiceImpl implements OrderService {
         }
         System.err.println(rr + "----------------------------------------");
         //todo !!!  修改购物车表中的商品状态 is_deleted ->true
+
+        try{
+            for (CartItem item : vo.getList()) {
+                cartItemMapper.updateToFinished(item.getId(),vo.getUser().getUid() );
+            }
+//            cartItemMapper.updateToFinishedInList(vo);
+        }catch(Exception e){
+           result.setCode(500);
+           result.setMessage("Server's problem,  -- change cart_item table ");
+           return result;
+        }
+        // 修改缓存数据库
+        redisTemplate.opsForValue().set("cart", null);
         result.setSuccess(true);
         result.setCode(202);
         result.setMessage("Success in save order ...");
@@ -89,6 +105,10 @@ public class OrderServiceImpl implements OrderService {
         return result;
     }
 
+    @Autowired
+    CartItemMapper cartItemMapper ;
+    @Autowired
+    RedisTemplate<String , Serializable> redisTemplate;
 
     @Override
     public Result selectByPage(HttpServletRequest req) {

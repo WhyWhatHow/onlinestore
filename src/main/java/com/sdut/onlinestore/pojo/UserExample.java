@@ -1164,6 +1164,136 @@ public class UserExample {
             addCriterion("rid not between", value1, value2, "rid");
             return (Criteria) this;
         }
+
+        public Criteria andIsDeletedIsNull() {
+            addCriterion("is_deleted is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedIsNotNull() {
+            addCriterion("is_deleted is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedEqualTo(Boolean value) {
+            addCriterion("is_deleted =", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotEqualTo(Boolean value) {
+            addCriterion("is_deleted <>", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedGreaterThan(Boolean value) {
+            addCriterion("is_deleted >", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("is_deleted >=", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedLessThan(Boolean value) {
+            addCriterion("is_deleted <", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedLessThanOrEqualTo(Boolean value) {
+            addCriterion("is_deleted <=", value, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedIn(List<Boolean> values) {
+            addCriterion("is_deleted in", values, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotIn(List<Boolean> values) {
+            addCriterion("is_deleted not in", values, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_deleted between", value1, value2, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDeletedNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("is_deleted not between", value1, value2, "isDeleted");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlIsNull() {
+            addCriterion("avatar_url is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlIsNotNull() {
+            addCriterion("avatar_url is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlEqualTo(String value) {
+            addCriterion("avatar_url =", value, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlNotEqualTo(String value) {
+            addCriterion("avatar_url <>", value, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlGreaterThan(String value) {
+            addCriterion("avatar_url >", value, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlGreaterThanOrEqualTo(String value) {
+            addCriterion("avatar_url >=", value, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlLessThan(String value) {
+            addCriterion("avatar_url <", value, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlLessThanOrEqualTo(String value) {
+            addCriterion("avatar_url <=", value, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlLike(String value) {
+            addCriterion("avatar_url like", value, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlNotLike(String value) {
+            addCriterion("avatar_url not like", value, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlIn(List<String> values) {
+            addCriterion("avatar_url in", values, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlNotIn(List<String> values) {
+            addCriterion("avatar_url not in", values, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlBetween(String value1, String value2) {
+            addCriterion("avatar_url between", value1, value2, "avatarUrl");
+            return (Criteria) this;
+        }
+
+        public Criteria andAvatarUrlNotBetween(String value1, String value2) {
+            addCriterion("avatar_url not between", value1, value2, "avatarUrl");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
