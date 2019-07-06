@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api("商品的相关接口 -- pass")
 @RequestMapping("/product")
 @CrossOrigin
@@ -114,10 +116,21 @@ public class ProductController {
             "  \"volume\": 0\n" +
             "}"
     )
-
     @PostMapping("/add")
     public Result insertProduct(@RequestBody Product product) {
         return service.insertProduct(product);
+    }
+
+    @ApiOperation("批量修改商品")
+    @GetMapping("/change")
+    public  Result changeListByPidAndState(List<String> list, Boolean state){
+        return service.changeListByPidAndState(list,state);
+    }
+
+    @ApiOperation("后台的模糊查询")
+    @PostMapping("/list")
+    public Result selectToList(Product product) {
+        return service.selectTolist(product);
     }
 }
 

@@ -36,25 +36,14 @@ public class UserController {
 //        return userzzz;
     }
 
-    @ApiOperation(value = "修改用户信息", notes = "提交数据为表单,封装的user对象")
+    @ApiOperation(value = "修改用户信息", notes = "提交数据为表单,封装的user对象", response = User.class)
 
     @PostMapping("/update")
     public Result updateUser(@RequestBody User user) {
         return service.updateUser(user);
     }
 
-    /**
-     * @return com.sdut.onlinestore.utils.Result
-     * @Author whywhathow
-     * TODO: 获取用户信息, 暂时感觉没有什么用处
-     * 前端:
-     * 后端:
-     * @Param [user]
-     **/
-//    @RequestMapping("/get")
-//    public Result selectUser(@RequestBody User user) {
-//        return ;
-//    }
+
 
     /**
      * @return com.sdut.onlinestore.utils.Result
@@ -71,9 +60,10 @@ public class UserController {
         return service.loginUser(user, request);
     }
 
-//    @GetMapping("/send")
-//    public Result sendToActiveUser(){
-//        return null ;
+//    @ApiOperation("发送激活码给用户")
+//    @PostMapping("/send")
+//    public Result sendToActiveUser(@RequestBody User user) {
+//        return service.sendACtiveCodeToUser(user);
 //    }
 
     /**
@@ -115,6 +105,7 @@ public class UserController {
             "\"password\":\"aa12321.\",\n" +
             "\"rid\":1\n" +
             "}", response = Menu.class)
+//    @ApiOperation("")
     @PostMapping("/role")
     public Result getRole(@RequestBody User user) {
         return service.getMenu(user);

@@ -43,6 +43,7 @@ public class OrderServiceImpl implements OrderService {
             item.setProduct(product);
             item.setTotal(cat.getSubTotal());
             item.setOrder(order);
+            list.add(item);
             System.err.println(item);
         }
         order.setList(list);
@@ -86,15 +87,15 @@ public class OrderServiceImpl implements OrderService {
         System.err.println(rr + "----------------------------------------");
         //todo !!!  修改购物车表中的商品状态 is_deleted ->true
 
-        try{
+        try {
             for (CartItem item : vo.getList()) {
-                cartItemMapper.updateToFinished(item.getId(),vo.getUser().getUid() );
+                cartItemMapper.updateToFinished(item.getId(), vo.getUser().getUid());
             }
 //            cartItemMapper.updateToFinishedInList(vo);
-        }catch(Exception e){
-           result.setCode(500);
-           result.setMessage("Server's problem,  -- change cart_item table ");
-           return result;
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  -- change cart_item table ");
+            return result;
         }
         // 修改缓存数据库
         redisTemplate.opsForValue().set("cart", null);
@@ -106,9 +107,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Autowired
-    CartItemMapper cartItemMapper ;
+    CartItemMapper cartItemMapper;
     @Autowired
-    RedisTemplate<String , Serializable> redisTemplate;
+    RedisTemplate<String, Serializable> redisTemplate;
 
     @Override
     public Result selectByPage(HttpServletRequest req) {

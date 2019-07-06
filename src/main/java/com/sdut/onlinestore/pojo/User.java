@@ -6,14 +6,24 @@ import java.util.Date;
 
 public class User  implements Serializable {
 
-    private String avatar;
+    private String rePhone ;
 
-    public String getAvatar() {
-        return avatar;
+    public String getRePhone() {
+        return rePhone;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setRePhone(String rePhone) {
+        this.rePhone = rePhone;
+    }
+
+    private String avatarUrl;
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatar) {
+        this.avatarUrl = avatar;
     }
 
     private String uid;

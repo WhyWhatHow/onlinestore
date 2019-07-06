@@ -7,8 +7,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CartVo implements Serializable {
-    List<CartItem> list ;
-    private User user ;
+
+    List<CartItem> list;
+
+    private User user;
 
     public User getUser() {
         return user;

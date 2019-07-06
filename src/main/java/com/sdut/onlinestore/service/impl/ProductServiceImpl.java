@@ -126,6 +126,46 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
+    public Result changeListByPidAndState(List<String> list, Boolean state) {
+
+        Result result = new Result();
+        result.setSuccess(false);
+        int res = 0;
+        try {
+            for (String pid : list) {
+                res += mapper.updateByPidToChangeState(pid, state);
+            }
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  --");
+            return result;
+        }
+        result.setData(res);
+        result.setSuccess(true);
+        result.setCode(202);
+        result.setMessage("Success in update product list to change state ");
+        return result;
+
+    }
+
+    @Override
+    public Result selectTolist(Product product) {
+        Result result = new Result();
+        result.setSuccess(false);
+        try{
+            mapper.selectToList(product);
+
+        }catch(Exception e){
+           result.setCode(500);
+           result.setMessage("Server's problem,  --");
+           return result;
+        }
+        return result;
+
+//        return null;
+    }
+
 
     @Override
     public Result selectByCategory(CategoryVo vo) {

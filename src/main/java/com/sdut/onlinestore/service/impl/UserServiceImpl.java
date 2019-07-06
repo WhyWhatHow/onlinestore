@@ -5,6 +5,7 @@ import com.sdut.onlinestore.mapper.UserMapper;
 import com.sdut.onlinestore.pojo.Menu;
 import com.sdut.onlinestore.pojo.Role;
 import com.sdut.onlinestore.pojo.User;
+import com.sdut.onlinestore.service.MailService;
 import com.sdut.onlinestore.service.UserService;
 import com.sdut.onlinestore.utils.MD5Util;
 import com.sdut.onlinestore.utils.Result;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper mapper;
 
+    @Autowired
+    MailService mailService;
+
     @Override
     @Transactional
     public Result registerUser(User user) {
@@ -35,7 +39,7 @@ public class UserServiceImpl implements UserService {
         // 添加用户
         LocalDateTime now = LocalDateTime.now();
         user.setCreateTime(now);
-        user.setState(false);
+        user.setState(true);
         user.setRid(3);//  默认角色
 
         // TODO  密码加密
@@ -49,6 +53,7 @@ public class UserServiceImpl implements UserService {
             result.setMessage("Server Problem!! -- reigister user encryption ");
             return result;
         }
+
 
         user.setPassword(password);
 
@@ -144,7 +149,7 @@ public class UserServiceImpl implements UserService {
         Integer rid = null;
         // !.获取用户对应的角色
         try {
-            rid =user.getRid();
+            rid = user.getRid();
 //            rid = mapper.selectByUserToRid(user);
         } catch (Exception e) {
             result.setCode(500);
@@ -181,6 +186,46 @@ public class UserServiceImpl implements UserService {
         result.setSuccess(true);
         result.setCode(202);
         result.setMessage("成功获取菜单数据");
+        return result;
+
+    }
+
+    private static String subject = "账号激活码";
+
+    @Override
+    public Result sendACtiveCodeToUser(User user) {
+
+        Result result = new Result();
+        String code = "";
+        user.setUid(MD5Util.setUUID());
+        code = MD5Util.setUUID() + MD5Util.setUUID();
+
+        String content = "<h3> 激活码: <a href ='#'>" + code + "</a> </h3>";
+        result.setSuccess(false);
+        int res = 0 ;
+        try{
+             res = mapper.insert(user);
+        }catch(Exception e){
+           result.setCode(500);
+           result.setMessage("Server's problem,  --");
+           return result;
+        }
+        int mail = 0 ;
+        try {
+            mail  = mailService.sendHtmlMail(user.getEmail(), subject, content);
+        } catch (Exception e) {
+            result.setCode(500);
+            result.setMessage("Server's problem,  -- send code to user ");
+            return result;
+        }
+        result.setCode(202);
+        if(mail ==1 && res ==1 ){
+            result.setSuccess(true);
+            result.setData(user);
+            result.setMessage("Success in sending user active code, please enter your email to check");
+        }else{
+            result.setMessage("bad in send email or generator active code !");
+        }
         return result;
 
     }

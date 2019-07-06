@@ -14,4 +14,8 @@ public interface UserService {
     Result updateUser(User user);
 
     Result getMenu(User user);
+
+//    Result sendACtiveCodeToUser(String uid, String email);
+
+    Result sendACtiveCodeToUser(User email);
 }

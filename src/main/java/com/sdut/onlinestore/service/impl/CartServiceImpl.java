@@ -12,6 +12,7 @@ import com.sdut.onlinestore.pojo.CartItem;
 import com.sdut.onlinestore.vo.CartItemVo;
 import com.sdut.onlinestore.vo.CartVo;
 import com.sdut.onlinestore.vo.ProductVo;
+import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -44,9 +45,10 @@ public class CartServiceImpl implements CartService {
         //TODO  逻辑存在问题,需要仔细进行校验
         Result result = new Result();
         result.setSuccess(false);
+        Product product = vo.getProduct();
         int res = 0;
-        CartItem cartItem = null;
-        // 1. cart表查找是否存在改购物项,若存在,数量加1, 不存在直接添加到数据库
+        CartItem cartItem = null; // 应该用map 处理的 ...
+        // 1. cart表查找是否存在改购物项,若存在,数量加 vo.getNum(), 不存在直接添加到数据库
         try {
             cartItem = mapper.selectByPidAndUid(vo.getProduct().getPid(), vo.getUser().getUid());
         } catch (Exception e) {
@@ -57,7 +59,8 @@ public class CartServiceImpl implements CartService {
         // 购物车中有该商品
         if (cartItem != null) {
             cartItem.setUpdated(new Date());
-            cartItem.setNum(cartItem.getNum() + 1);
+            cartItem.setNum(vo.getNum()+cartItem.getNum());
+            cartItem.setSubTotal(cartItem.getNum() * cartItem.getPrice());
             int ress = 0;
             try {
                 ress = mapper.updateByPrimaryKeyToNum(cartItem);
@@ -71,27 +74,33 @@ public class CartServiceImpl implements CartService {
                 result.setMessage("修改商品到购物车失败");
             } else {
                 result.setSuccess(true);
-                result.setMessage("success in add product 1 to more cartItem");
+                result.setData(ress);
+                result.setMessage("success in add product num to more cartItem");
             }
             return result;
         }
         // 购物车中没有该商品 直接添加
+        cartItem = new CartItem();
         try {
-            cartItem.setCreated(new Date());
-            cartItem.setUid(vo.getUser().getUid());
-            Product product = vo.getProduct();
-            cartItem.setPid(product.getPid());
-            cartItem.setPlocation(product.getLocation());
-            cartItem.setPname(product.getPname());
-//          cartItem.setNum();
-            res = mapper.insert(cartItem);
 
+            System.err.println("-----------------------------------------");
+            cartItem.setUid(vo.getUser().getUid());
+            System.err.println("-----------------------------------------");
+
+            cartItem.setProduct(product);
+
+            System.err.println(cartItem);
+            cartItem.setNum(vo.getNum());
+            System.err.println("-----------------------------------------");
+
+            cartItem.setSubTotal(vo.getNum() * product.getPrice());
+            System.err.println(cartItem);
+            res = mapper.insert(cartItem);
         } catch (Exception e) {
             result.setCode(500);
             result.setMessage("Server's problem,  -- add product to cartItem");
             return result;
         }
-
         result.setSuccess(true);
         result.setCode(202);
         result.setData(1);
@@ -101,7 +110,6 @@ public class CartServiceImpl implements CartService {
         return result;
     }
 
-    // TODO maybe wrong !!!
     @Override
     public Result selectAll(HttpServletRequest req) {
         // 根据用户的uid 来查找用户尚未结算的订单
@@ -114,16 +122,16 @@ public class CartServiceImpl implements CartService {
         result = new Result();
         // TODO 判断用户登录 ,改用拦截器 need be change
         // 判断用户是否已经登录
-//        User user = (User) req.getSession().getAttribute("user");
-//        if (user == null || StringUtils.isEmpty(user.getUid())) {
-//            result.setMessage("error , no user login in , please login in ");
-//            result.setCode(202);
-//            return result;
-//        }
-        //TODo test need be change
-        User user = new User();
-        user.setUid("4b2f453be2534b538d4c9455064dfec7");
-        // todo finished
+        User user = (User) req.getSession().getAttribute("user");
+        if (user == null || StringUtils.isEmpty(user.getUid())) {
+            result.setMessage("error , no user login in , please login in ");
+            result.setCode(202);
+            return result;
+        }
+//        TODo test need be change
+//        User user = new User();
+//        user.setUid("4b2f453be2534b538d4c9455064dfec7");
+//        // todo finished
         // 获取购物车列表
         List<CartItem> cartItems = null;
         try {
@@ -134,7 +142,6 @@ public class CartServiceImpl implements CartService {
             return result;
         }
         result.setCode(202);
-        // todo wrong .. ..
         if (cartItems == null || cartItems.size() == 0) {
 
             result.setMessage("你还没有添加任何商品呢, 请先添加商品然后再来查看购物车");
@@ -143,9 +150,8 @@ public class CartServiceImpl implements CartService {
             result.setData(cartItems);
             result.setSuccess(true);
             result.setMessage("Success in get CartItem");
-
+            redisTemplate.opsForValue().set("cart", result);
         }
-        redisTemplate.opsForValue().set("cart", result);
         return result;
     }
 

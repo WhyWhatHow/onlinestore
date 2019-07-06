@@ -21,7 +21,7 @@ public class OrderController {
     @Autowired
     OrderService service;
 
-    @ApiOperation(value = "添加订单", notes = "这个方法可能有错误,需要测试的仔细点 ", response = Integer.class)
+    @ApiOperation(value = "添加订单", notes = " 这个方法可能有错误,需要测试的仔细点 ", response = Integer.class)
     @PostMapping("/add")
     public Result saveOrder(@RequestBody CartVo vo) {
         return service.saveOrder(vo);
@@ -37,14 +37,11 @@ public class OrderController {
     @GetMapping("/detail")
     public Result getDetail(String oid) {
         return service.getDetail(oid);
-
     }
-
     // 0 生成订单,(未确定收货地址) 1. 确认订单(未付款)  2. 付款未发货,  3. 发货已收到
     @ApiOperation(value = "用户付款修改订单状态, 后期可能修改该方法" )
     @GetMapping("/pay")
     public Result userPay(String oid) {
         return service.userPay(oid);
     }
-
 }

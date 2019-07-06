@@ -56,4 +56,10 @@ public interface ProductMapper {
 
     @Select("select * from product where pname like concat('%',#{panme},'%')")
     List<Product> selectByLike(String pname);
+
+    @Update("update set is_deleted = #{state} where pid = #{pid}")
+    int updateByPidToChangeState(String pid, Boolean state);
+//    @Select("select * from product where pname like concat('%',#{pname},'%')  ")
+    List<Product> selectToList(Product product);
+
 }

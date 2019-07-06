@@ -3,8 +3,35 @@ package com.sdut.onlinestore.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class CartItem  implements Serializable {
+public class CartItem implements Serializable {
     // pid , price , subtotal , num
+
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "price=" + price +
+                ", subTotal=" + subTotal +
+                ", id=" + id +
+                ", uid='" + uid + '\'' +
+                ", pid='" + pid + '\'' +
+                ", pname='" + pname + '\'' +
+                ", plocation='" + plocation + '\'' +
+                ", num=" + num +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", isFinished=" + isFinished +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
+
+    public void setProduct(Product product) {
+        this.price = product.getPrice();
+        this.pid = product.getPid();
+        this.pname = product.getPname();
+        this.plocation = product.getLocation();
+        this.created = new Date();
+//        this.subTotal = this.price;
+    }
 
     private Double price;
 
@@ -15,7 +42,8 @@ public class CartItem  implements Serializable {
     public double subTotal;
 
     public double getSubTotal() {
-        return price * num;
+//        return price * num;
+        return subTotal;
     }
 
     public void setSubTotal(double subTotal) {
@@ -56,7 +84,7 @@ public class CartItem  implements Serializable {
 
     private String plocation;
 
-    private Integer num;
+    private Integer num = 1;
 
     private Date created;
 
