@@ -20,3 +20,10 @@
 ## order state : 
  0 生成订单,(未确定收货地址) 1. 确认订单(未付款)  2. 付款未发货,  3. 发货已收到
   
+  
+## 邮箱激活: <a href='ip/user/active?code=code'></a>
+
+
+## 轮播图生成... ( 
+SELECT * FROM product ORDER BY output DESC ,create_time DESC  LIMIT 4
+)

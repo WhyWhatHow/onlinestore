@@ -1,6 +1,6 @@
 package com.sdut.onlinestore.utils;
 
-import com.sdut.onlinestore.pojo.Category;
+import top.enjoylife.fixed_asserts_management_system.pojo.Category;
 
 import java.util.List;
 

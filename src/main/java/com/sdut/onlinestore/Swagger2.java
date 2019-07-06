@@ -20,7 +20,7 @@ public class Swagger2 {
                 .apiInfo(apiInfo())
                 .select()
                 ////为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.sdut.onlinestore.controller"))
+                .apis(RequestHandlerSelectors.basePackage("top.enjoylife.fixed_asserts_management_system.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

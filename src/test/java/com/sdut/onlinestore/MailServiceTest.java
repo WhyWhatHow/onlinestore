@@ -1,6 +1,6 @@
 package com.sdut.onlinestore;
 
-import com.sdut.onlinestore.service.MailService;
+import top.enjoylife.fixed_asserts_management_system.service.MailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

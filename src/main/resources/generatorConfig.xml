@@ -31,7 +31,7 @@
         </javaTypeResolver>
 
         <!-- targetProject:生成PO类的位置 -->
-        <javaModelGenerator targetPackage="com.sdut.onlinestore.pojo"
+        <javaModelGenerator targetPackage="top.enjoylife.fixed_asserts_management_system.pojo"
                             targetProject=".\src">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
@@ -46,7 +46,7 @@
         </sqlMapGenerator>
         <!-- targetPackage：mapper接口生成的位置 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.sdut.onlinestore.mapper"
+                             targetPackage="top.enjoylife.fixed_asserts_management_system.mapper"
                              targetProject=".\src">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
