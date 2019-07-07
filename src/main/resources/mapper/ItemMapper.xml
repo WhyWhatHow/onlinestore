@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdut.onlinestore.mapper.ItemMapper">
+    <resultMap id="BaseResultMap" type="com.sdut.onlinestore.pojo.Item">
+        <id column="itemid" property="itemid" jdbcType="VARCHAR"/>
+        <result column="quantity" property="quantity" jdbcType="INTEGER"/>
+        <result column="total" property="total" jdbcType="DOUBLE"/>
+        <result column="pid" property="pid" jdbcType="VARCHAR"/>
+        <result column="oid" property="oid" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    itemid, quantity, total, pid, oid
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sdut.onlinestore.pojo.ItemExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from item
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from item
+        where itemid = #{itemid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from item
+    where itemid = #{itemid,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.sdut.onlinestore.pojo.ItemExample">
+        delete from item
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.sdut.onlinestore.pojo.Item">
+    insert into item (itemid, quantity, total,  pid, oid)
+    values (#{itemid,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, #{total,jdbcType=DOUBLE}, 
+      #{pid,jdbcType=VARCHAR}, #{oid,jdbcType=VARCHAR})
+  </insert>
+
+    <insert id="insertByList" parameterType="java.util.List">
+        insert into item  values
+        <foreach item='item' index='index' collection="list"
+                 separator=',' >
+            (#{item.itemid}, #{item.quantity}, #{item.total}, #{item.product.pid},#{item.order.oid})
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.sdut.onlinestore.pojo.Item">
+        insert into item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="itemid != null">
+                itemid,
+            </if>
+            <if test="quantity != null">
+                quantity,
+            </if>
+            <if test="total != null">
+                total,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="oid != null">
+                oid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="itemid != null">
+                #{itemid,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null">
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="total != null">
+                #{total,jdbcType=DOUBLE},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="oid != null">
+                #{oid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.sdut.onlinestore.pojo.ItemExample" resultType="java.lang.Integer">
+        select count(*) from item
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update item
+        <set>
+            <if test="record.itemid != null">
+                itemid = #{record.itemid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.quantity != null">
+                quantity = #{record.quantity,jdbcType=INTEGER},
+            </if>
+            <if test="record.total != null">
+                total = #{record.total,jdbcType=DOUBLE},
+            </if>
+            <if test="record.pid != null">
+                pid = #{record.pid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.oid != null">
+                oid = #{record.oid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update item
+        set itemid = #{record.itemid,jdbcType=VARCHAR},
+        quantity = #{record.quantity,jdbcType=INTEGER},
+        total = #{record.total,jdbcType=DOUBLE},
+        pid = #{record.pid,jdbcType=VARCHAR},
+        oid = #{record.oid,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sdut.onlinestore.pojo.Item">
+        update item
+        <set>
+            <if test="quantity != null">
+                quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="total != null">
+                total = #{total,jdbcType=DOUBLE},
+            </if>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="oid != null">
+                oid = #{oid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where itemid = #{itemid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sdut.onlinestore.pojo.Item">
+    update item
+    set quantity = #{quantity,jdbcType=INTEGER},
+      total = #{total,jdbcType=DOUBLE},
+      pid = #{pid,jdbcType=VARCHAR},
+      oid = #{oid,jdbcType=VARCHAR}
+    where itemid = #{itemid,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

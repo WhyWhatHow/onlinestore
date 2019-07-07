@@ -27,3 +27,4 @@
 ## 轮播图生成... ( 
 SELECT * FROM product ORDER BY output DESC ,create_time DESC  LIMIT 4
 )
+##  toString() 方法有时可能会报出stackoverflow 的问题
