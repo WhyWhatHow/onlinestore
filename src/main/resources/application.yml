@@ -23,6 +23,14 @@ spring:
       min-evictable-idle-timeMillis: 300000
       # validation-query: select 'x' FROM DUAL
       # test-while-idle: true
+  mvc:
+    static-path-pattern: /image/**
+  resources:
+    static-locations: file:d:\\onlinestorepic\
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 
 #      testWhileIdle: true
 #      test-on-borrow: false
@@ -35,22 +43,15 @@ spring:
 #      use-global-data-source-stat: true
 
 
+
 server:
   port: 80
   tomcat:
     uri-encoding: UTF-8
-  mvc:
-    static-path-pattern: /image/**
-  resources:
-    static-locations: classpath:/static/pic
 
-  servlet:
-      multipart:
-        max-file-size: 100MB
-        max-request-size: 100MB
 
 mybatis:
-  type-aliases-package: top.enjoylife.fixed_asserts_management_system.pojo
+  type-aliases-package: com.sdut.onlinestore.pojo
   mapper-locations: classpath:mapper/*Mapper.xml
   configuration:
     # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
