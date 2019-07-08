@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
             item.setProduct(product);
             item.setTotal(cat.getSubTotal());
             item.setOrder(order);
-            sum += item.getTotal();
+//            sum += item.getTotal();
 
             order.getList().add(item);
 //            list.add(item);
