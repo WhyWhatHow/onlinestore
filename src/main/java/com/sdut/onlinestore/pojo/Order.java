@@ -54,13 +54,6 @@ public class Order {
         this.oid = oid == null ? null : oid.trim();
     }
 
-//    public String getUid() {
-//        return uid;
-//    }
-//
-//    public void setUid(String uid) {
-//        this.uid = uid == null ? null : uid.trim();
-//    }
 
     public Date getOrdertime() {
         return ordertime;

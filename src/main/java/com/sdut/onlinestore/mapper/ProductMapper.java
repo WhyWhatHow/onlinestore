@@ -13,8 +13,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface ProductMapper {
 
-    @Select("select * from product")
-    List<Product> selectAll();
 
 
     int countByExample(ProductExample example);
@@ -39,6 +37,9 @@ public interface ProductMapper {
 
     int updateByPrimaryKey(Product record);
 
+
+    @Select("select * from product")
+    List<Product> selectAll();
 
     @Select("select count(pid) from product")
     long selectCount();
